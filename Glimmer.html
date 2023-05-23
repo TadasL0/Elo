@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Glimmer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="Glimmer CSS.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr@2.0.5/dist/themes/classic.min.css">
+</head>
+<body>
+  <div class="hamburger">
+    <span class="line"></span>
+    <span class="line"></span>
+    <span class="line"></span>
+  </div>
+  <div class="sidebar">
+    <ul>
+      <li class="tab active" data-tab="tab1" contenteditable>Entry 1</li>
+      <li class="tab" data-tab="tab2" contenteditable>Entry 2</li>
+      <li class="tab" data-tab="tab3" contenteditable>Entry 3</li>
+    </ul>
+  </div>
+  <div class="content">
+    <div id="summary-container"></div>
+    <button id="new-entry-button">New Entry</button>
+    <div id="diary-entry-container"></div>
+  </div>
+
+  <input type="file" id="audio-upload" accept=".mp3,.wav,.flac">
+  <button id="process-button">Process Audio</button>
+  <div id="transcription-result"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr@2.0.5/dist/pickr.min.js"></script>
+  <script src="Glimmer Functionality.js"></script>
+  <script>
+    function addDiaryEntry() {
+      const diaryEntryContainer = document.getElementById('diary-entry-container');
+      const diaryEntry = document.createElement('div');
+      diaryEntry.classList.add('diary-entry');
+
+      const textareaWrapper = document.createElement('div');
+      textareaWrapper.classList.add('textarea-wrapper');
+
+      const diaryEntryTextarea = document.createElement('textarea');
+      diaryEntryTextarea.classList.add('diary-entry-textarea');
+      diaryEntryTextarea.setAttribute('placeholder', 'Type your entry here...');
+
+      const colorPickerButton = document.createElement('button');
+      colorPickerButton.classList.add('color-picker-button');
+      colorPickerButton.innerHTML = '<i class="fas fa-palette"></i>';
+
+      textareaWrapper.appendChild(diaryEntryTextarea);
+      diaryEntry.appendChild(textareaWrapper);
+      diaryEntry.appendChild(colorPickerButton);
+      diaryEntryContainer.appendChild(diaryEntry);
+
+      // Initialize the color picker for the new entry
+      const pickr = Pickr.create({
+        el: colorPickerButton,
+        theme: 'classic',
+        default: '#000000',
+        swatches: [
+          'rgba(244, 67, 54, 1)',
+          'rgba(233, 30, 99, 1)',
+          'rgba(156, 39, 176, 1)',
+          'rgba(103, 58, 183, 1)',
+          'rgba(63, 81, 181, 1)',
+          'rgba(33, 150, 243, 1)',
+          'rgba(3, 169, 244, 1)',
+          'rgba(0, 188, 212, 1)',
+          'rgba(0, 150, 136, 1)',
+          'rgba(76, 175, 80, 1)',
+          'rgba(139, 195, 74, 1)',
+          'rgba(205, 220, 57, 1)',
+          'rgba(255, 235, 59, 1)',
+          'rgba(255, 193, 7, 1)',
+        ],
+        components: {
+          preview: true,
+          opacity: true,
+          hue: true,
+          interaction: {
+            input: true,
+            clear: true,
+            save: true,
+          },
+        },
+      });
+    }
+
+    const newEntryButton = document.getElementById('new-entry-button');
+    newEntryButton.addEventListener('click', addDiaryEntry);
+  </script>
+</body>
+</html>
