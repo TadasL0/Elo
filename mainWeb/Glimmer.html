@@ -3,20 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <title>Glimmer</title>
-  <link rel="stylesheet" href="Glimmer CSS.css">
-  <link rel="stylesheet" href="Glimmer Custom CSS.css">
+  <link rel="stylesheet" href="styling.css">
+  <link rel="stylesheet" href="sidepanel.css">
 </head>
 <body>
-  <div class="content">
-    <textarea id="journal-entry" placeholder="What's on your mind right now?"></textarea>
-    <div id="color-options">
-      <div class="color-option highlight-red" onclick="applyHighlightColor('highlight-red')"></div>
-      <div class="color-option highlight-yellow" onclick="applyHighlightColor('highlight-yellow')"></div>
-      <div class="color-option highlight-orange" onclick="applyHighlightColor('highlight-orange')"></div>
-      <div class="color-option highlight-green" onclick="applyHighlightColor('highlight-green')"></div>
-      <div class="color-option highlight-blue" onclick="applyHighlightColor('highlight-blue')"></div>
+  <div id="side-panel" class="side-panel">
+    <h2 class="panel-title">Previous Entries</h2>
+    <ul id="entry-list" class="entry-list">
+      <!-- Placeholder list items for demonstration -->
+      <li class="entry-item">
+        <h3 class="entry-title">Entry 1</h3>
+        <p class="entry-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </li>
+      <li class="entry-item">
+        <h3 class="entry-title">Entry 2</h3>
+        <p class="entry-content">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </li>
+      <li class="entry-item">
+        <h3 class="entry-title">Entry 3</h3>
+        <p class="entry-content">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="content">
+      <textarea id="journal-entry" placeholder="What's on your mind right now?"></textarea>
+      <div id="color-options">
+        <div class="color-option highlight-red" onclick="applyHighlightColor('highlight-red')"></div>
+        <div class="color-option highlight-yellow" onclick="applyHighlightColor('highlight-yellow')"></div>
+        <div class="color-option highlight-orange" onclick="applyHighlightColor('highlight-orange')"></div>
+        <div class="color-option highlight-green" onclick="applyHighlightColor('highlight-green')"></div>
+        <div class="color-option highlight-blue" onclick="applyHighlightColor('highlight-blue')"></div>
+      </div>
+      <button id="save-entry-button">Save Entry</button>
     </div>
-    <button id="save-entry-button">Save Entry</button>
   </div>
 
   <script src="savingfunctionality.js"></script>

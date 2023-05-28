@@ -1,3 +1,4 @@
+// Highglight functionality
 function applyHighlightColor(colorClass) {
     const journalEntry = document.getElementById('journal-entry');
     const selectedText = window.getSelection().toString();
@@ -12,3 +13,11 @@ function applyHighlightColor(colorClass) {
       range.insertNode(span);
     }
   }
+
+  // JavaScript code to toggle the side panel
+  const sidePanel = document.getElementById('side-panel');
+  const toggleButton = document.getElementById('toggle-button');
+
+  toggleButton.addEventListener('click', () => {
+    sidePanel.classList.toggle('show-panel');
+  });
