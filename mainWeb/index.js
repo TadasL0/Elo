@@ -12,10 +12,10 @@ app.use(express.json());
 
 const pool = new Pool({
   user: "postgres",
-  password: "balajisl0",
+  password: "tadas",
   host: "localhost",
   port: 5432,
-  database: "Journalling Entries",
+  database: "postgres",
 });
 
 // Connect to PostgreSQL
@@ -47,6 +47,11 @@ app.post("/api/entries", (req, res) => {
       }
     }
   );
+});
+
+app.get("/api/entries", (req, res) => {
+  // Handle GET request logic here
+  res.json({ message: "GET request received for /api/entries" });
 });
 
 // Start the server
