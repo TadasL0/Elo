@@ -83,7 +83,8 @@ body::before {
   background-color: #64d8ff;
 }
 
-#save-entry-button {
+#save-entry-button,
+#condense-button {
   display: block;
   width: 150px;
   height: 40px;
@@ -98,17 +99,21 @@ body::before {
   transition: background-color 0.3s;
 }
 
-#save-entry-button:hover {
+#save-entry-button:hover,
+#condense-button:hover {
   background-color: #00a8d8;
 }
 
-#save-entry-button:focus {
+#save-entry-button:focus,
+#condense-button:focus {
   outline: none;
 }
 
-#save-entry-button:active {
+#save-entry-button:active,
+#condense-button:active {
   background-color: #0088b4;
 }
+
 
 .panel-title {
   font-size: 20px;
@@ -155,3 +160,11 @@ body::before {
   font-size: 24px;
 }
 
+.button-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#save-entry-button {
+  margin-right: 10px; /* Add some spacing between the buttons */
+}
