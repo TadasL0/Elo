@@ -2,7 +2,7 @@ body, html {
   height: 100%;
   margin: 0;
   padding: 20px;
-  background-color: #333333;
+  background-color: #45145c;
 }
 
 .content {
@@ -123,3 +123,22 @@ body, html {
   font-size: 14px;
   color: #555555;
 }
+
+#streak {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#streak-count {
+  font-size: 20px;
+  font-weight: bold;
+  color: #4a72f5;
+  margin-right: 10px;
+}
+
+.fa-fire {
+  color: #4a72f5;
+  font-size: 24px;
+}
+

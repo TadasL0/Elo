@@ -5,3 +5,4 @@ const toggleButton = document.getElementById('toggle-button');
 toggleButton.addEventListener('click', () => {
   sidePanel.classList.toggle('show-panel');
 });
+

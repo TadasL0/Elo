@@ -5,6 +5,8 @@
   <title>Glimmer</title>
   <link rel="stylesheet" href="styling.css">
   <link rel="stylesheet" href="sidepanel.css">
+  <link rel="stylesheet" href="streak.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
   <div id="side-panel" class="side-panel">
@@ -24,10 +26,14 @@
         <p class="entry-content">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </li>
     </ul>
-    <div class="toggle-button" onclick="toggleSidePanel()"></div>
+    <div class="toggle-button" onclick="toggleSidePanel()"></div>   
   </div>
   <div class="container">
     <div class="content">
+      <div id="streak">
+        <span id="streak-count">0</span>
+        <i class="fas fa-fire"></i>
+      </div> 
       <textarea id="journal-entry" placeholder="What's on your mind right now?"></textarea>
       <div id="color-options">
         <div class="color-option highlight-red" onclick="applyHighlightColor('highlight-red')"></div>
@@ -39,9 +45,8 @@
       <button id="save-entry-button">Save Entry</button>
     </div>
   </div>
-
   <script src="sidepanel.js"></script>
   <script src="savingfunctionality.js"></script>
+  <script src="streak.js"></script>
 </body>
 </html>
-
