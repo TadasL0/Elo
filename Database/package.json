@@ -2,9 +2,9 @@
   "name": "glimmer",
   "version": "1.0.0",
   "description": "A journalling app for enhanced cognitive ability.",
-  "main": "mainWeb/index.js",
+  "main": "Database/index.js",
   "scripts": {
-    "start": "node mainWeb/index.js",
+    "start": "node Database/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
