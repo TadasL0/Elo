@@ -4,7 +4,7 @@
   left: -250px;
   width: 300px;
   height: 100%;
-  background-color: #19022c;
+  background-color: #1B1B1A;
   padding: 20px;
   box-sizing: border-box;
   border: 4px solid #000000;
@@ -19,7 +19,7 @@
 .panel-title {
   font-size: 20px;
   margin-bottom: 10px;
-  color: #ffffff;
+  color: #250d1d;
 }
 
 .entry-list {
@@ -47,22 +47,22 @@
 }
 
 .entry-item:hover {
-  background-color: #e0e0e0;
+  background-color: #000000;
 }
 
 .entry-item.selected {
-  background-color: #c0c0c0;
+  background-color: #000000;
 }
 
 .entry-title {
   font-size: 18px;
   margin-bottom: 5px;
-  color: #ffffff;
+  color: #320f30;
 }
 
 .entry-content {
   font-size: 14px;
-  color: #831919;
+  color: #270505;
 }
 
 .toggle-button {
@@ -122,7 +122,7 @@
 }
 
 .entry-item:hover {
-  background-color: #e0e0e0;
+  background-color: #bcbcbc;
 }
 
 .entry-item.selected {
