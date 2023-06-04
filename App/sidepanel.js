@@ -1,19 +1,15 @@
 // JavaScript code to toggle the side panel
 function toggleSidePanel() {
   const sidePanel = document.getElementById('side-panel');
+  const entryItems = document.getElementsByClassName('entry-item');
+
   sidePanel.classList.toggle('show-panel');
+
+  // Toggle visibility of entry items when side panel is closed
+  for (let item of entryItems) {
+    item.classList.toggle('entry-visible');
+  }
 }
 
-const sidePanel = document.getElementById('side-panel');
 const toggleButton = document.getElementById('toggle-button');
-
-let isPanelOpen = false;
-
-toggleButton.addEventListener('click', () => {
-  isPanelOpen = !isPanelOpen;
-  if (isPanelOpen) {
-    sidePanel.style.transform = 'translateX(0)';
-  } else {
-    sidePanel.style.transform = 'translateX(-100%)';
-  }
-});
+toggleButton.addEventListener('click', toggleSidePanel);
