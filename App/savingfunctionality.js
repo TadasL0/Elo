@@ -1,3 +1,5 @@
+// savingfunctionality.js
+
 let autosaveTimer; // Variable to store the timer ID
 
 const autosaveEntry = async () => {
@@ -7,6 +9,8 @@ const autosaveEntry = async () => {
   // Set a new timer to trigger autosave after a brief delay
   autosaveTimer = setTimeout(async () => {
     const entry = document.getElementById("journal-entry").value;
+    const currentDate = new Date().toLocaleDateString(); // Get the current date
+
     const data = {
       title: `Diary Entry - ${currentDate}`, // Add the current date to the title
       content: entry,
@@ -33,4 +37,3 @@ const autosaveEntry = async () => {
 };
 
 document.getElementById("journal-entry").addEventListener("input", autosaveEntry);
-

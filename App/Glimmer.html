@@ -10,11 +10,10 @@
 </head>
 <body>
   <div id="side-panel" class="side-panel">
-    <h2 class="panel-title">Previous Entries</h2>
-    <ul id="entry-list" class="entry-list">
-    </ul>
+    <div class="new-entry-button" onclick="createNewEntry()"><i class="fas fa-plus"></i></div>
+    <ul id="entry-list" class="entry-list"></ul>
     <div class="toggle-button" onclick="toggleSidePanel()"></div>   
-  </div>
+  </div>  
   <div class="container">
     <div class="content">
       <div id="streak">
@@ -24,10 +23,7 @@
       <textarea id="journal-entry" placeholder="What's on your mind right now?" oninput="autosaveEntry()"></textarea>
       <div id="color-options">
         <div class="color-option highlight-red" onclick="applyHighlightColor('highlight-red')"></div>
-        <div class="color-option highlight-yellow" onclick="applyHighlightColor('highlight-yellow')"></div>
-        <div class="color-option highlight-orange" onclick="applyHighlightColor('highlight-orange')"></div>
         <div class="color-option highlight-green" onclick="applyHighlightColor('highlight-green')"></div>
-        <div class="color-option highlight-blue" onclick="applyHighlightColor('highlight-blue')"></div>
       </div>
       <div class="button-container">
         <!--<button id="save-entry-button">Save Entry</button>-->
@@ -38,5 +34,6 @@
   <script src="sidepanel.js"></script>
   <script src="savingfunctionality.js"></script>
   <script src="streak.js"></script>
+  <script src="createentry.js"></script>
 </body>
 </html>
