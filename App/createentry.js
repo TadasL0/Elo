@@ -1,8 +1,8 @@
 // Sample entries for demonstration
 const entries = [
-    { id: 1, title: 'Entry 1', content: 'Lorem ipsum dolor sit amet.' },
-    { id: 2, title: 'Entry 2', content: 'Sed ut perspiciatis unde omnis iste natus error.' },
-    { id: 3, title: 'Entry 3', content: 'Eaque ipsa quae ab illo inventore veritatis et quasi.' }
+    { id: 1, title: 'Latest Entry', content: 'Lorem ipsum dolor sit amet.' },
+    { id: 2, title: 'Another Entry', content: 'Sed ut perspiciatis unde omnis iste natus error.' },
+    { id: 3, title: 'Last Entry', content: 'Eaque ipsa quae ab illo inventore veritatis et quasi.' }
   ];
   
   const entryList = document.getElementById("entry-list");
