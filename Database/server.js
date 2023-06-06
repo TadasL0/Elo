@@ -5,28 +5,23 @@ const app = express();
 
 app.use(express.json());
 
-app.post('/summarize', (req, res) => {
-  const text = req.body.text; // Assuming the text is sent in the request body
+app.post("/api/entries", (req, res) => {
+  const { title, content } = req.body;
 
-  // Spawn a Python process and execute the summarization script
-  const pythonProcess = spawn('python', ['summarization.py', text]);
-
-  let summary = '';
-
-  pythonProcess.stdout.on('data', (data) => {
-    // Capture the output from the Python process
-    summary += data.toString();
-  });
-
-  pythonProcess.on('close', (code) => {
-    if (code === 0) {
-      // Return the summary as the response
-      res.json({ summary });
-    } else {
-      // Handle any errors
-      res.status(500).json({ error: 'An error occurred during summarization' });
+  // Save the journal entry to the PostgreSQL database
+  pool.query(
+    "INSERT INTO entries (title, content) VALUES ($1, $2)",
+    [title, content],
+    (err, result) => {
+      if (err) {
+        console.error("Error saving journal entry:", err);
+        res.status(500).json({ error: "An error occurred while saving the journal entry" });
+      } else {
+        console.log("Journal entry saved successfully");
+        res.status(200).json({ message: "Journal entry saved successfully" });
+      }
     }
-  });
+  );
 });
 
 app.listen(3000, () => {

@@ -55,9 +55,22 @@
 }
 
 .entry-title {
+  /* Add your desired styles for the entry title here */
+  cursor: pointer;
+  font-weight: bold;
+  font-family: "Inter", sans-serif;
   font-size: 18px;
   margin-bottom: 5px;
   color: #320f30;
+  /* Add any other styles as needed */
+}
+
+.entry-title.editable {
+  /* Add styles for the editable entry title here */
+  outline: none;
+  border: none;
+  background: none;
+  /* Add any other styles as needed */
 }
 
 .entry-content {
