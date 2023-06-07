@@ -28,14 +28,13 @@ const renderEntryList = () => {
 };
 
 const createNewEntry = () => {
-  const newEntryId = entries.length + 1;
+  const newEntryId = Date.now();
   const newEntry = { id: newEntryId, title: 'New Entry', content: '' };
   entries.push(newEntry);
   selectedEntryIndex = entries.length - 1;
   renderEntryList();
   selectEntry(selectedEntryIndex);
-
-  // Save the entries to local storage
+  scrollToSelectedEntry();
   saveEntriesToLocalStorage();
 };
 
@@ -61,6 +60,17 @@ const selectEntry = (index) => {
 
 const saveEntriesToLocalStorage = () => {
   localStorage.setItem("entries", JSON.stringify(entries));
+};
+
+const scrollToSelectedEntry = () => {
+  const selectedEntry = document.querySelector(".entry-item.selected");
+  if (selectedEntry) {
+    selectedEntry.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "start",
+    });
+  }
 };
 
 document.addEventListener("DOMContentLoaded", () => {
