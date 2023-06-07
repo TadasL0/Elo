@@ -1,11 +1,6 @@
-const entries = [
-  { id: 1, title: 'Latest Entry', content: '' },
-  { id: 2, title: 'Default', content: '' },
-  { id: 3, title: 'Default New', content: '' }
-];
-
 const entryList = document.getElementById("entry-list");
-let selectedEntryIndex = -1; // Index of the currently selected entry
+let entries = [];
+let selectedEntryIndex = 0; // Index of the currently selected entry
 
 const renderEntryList = () => {
   entryList.innerHTML = ""; // Clear the previous entries
@@ -32,6 +27,18 @@ const renderEntryList = () => {
   });
 };
 
+const createNewEntry = () => {
+  const newEntryId = entries.length + 1;
+  const newEntry = { id: newEntryId, title: 'New Entry', content: '' };
+  entries.push(newEntry);
+  selectedEntryIndex = entries.length - 1;
+  renderEntryList();
+  selectEntry(selectedEntryIndex);
+
+  // Save the entries to local storage
+  saveEntriesToLocalStorage();
+};
+
 const selectEntry = (index) => {
   if (index === selectedEntryIndex) {
     return; // Already selected, no need to perform any action
@@ -50,39 +57,32 @@ const selectEntry = (index) => {
     const journalEntry = document.getElementById("journal-entry");
     journalEntry.value = entries[selectedEntryIndex].content || ""; // Set the textarea value to the selected entry's content
   }
-
-  // Perform any additional actions when selecting an entry
-  // For example, update the journal textarea with the selected entry's content
 };
 
+const saveEntriesToLocalStorage = () => {
+  localStorage.setItem("entries", JSON.stringify(entries));
+};
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Retrieve entries from local storage if available
+  const storedEntries = localStorage.getItem("entries");
+  if (storedEntries) {
+    entries = JSON.parse(storedEntries);
+  } else {
+    // If no entries found in local storage, use default entry
+    entries = [
+      { id: 1, title: 'Default Entry', content: '' }
+    ];
+  }
+
   renderEntryList(); // Render the initial entry list
-
-  // Retrieve entry texts and labels from local storage
-  entries.forEach((entry, index) => {
-    const savedContent = localStorage.getItem(`content_${entry.id}`);
-    if (savedContent !== null) {
-      entry.content = savedContent;
-    }
-
-    const savedTitle = localStorage.getItem(`title_${entry.id}`);
-    if (savedTitle !== null) {
-      entry.title = savedTitle;
-    }
-  });
-
-  // Update the entry list and selected entry
-  renderEntryList();
   selectEntry(selectedEntryIndex);
 });
 
 // Handle the event when the textarea input changes
 document.getElementById("journal-entry").addEventListener("input", (event) => {
   entries[selectedEntryIndex].content = event.target.value; // Update the content of the selected entry
-
-  // Save the entry content to local storage
-  localStorage.setItem(`content_${entries[selectedEntryIndex].id}`, event.target.value);
+  saveEntriesToLocalStorage();
 });
 
 // Handle the event when the entry title is clicked
@@ -90,11 +90,11 @@ document.addEventListener("click", (event) => {
   if (event.target.classList.contains("entry-title") && event.target.tagName === "H3") {
     const selectedTitle = event.target;
     const previousTitle = selectedTitle.textContent;
-    
+
     selectedTitle.contentEditable = true;
     selectedTitle.classList.add("editable");
     selectedTitle.focus();
-    
+
     selectedTitle.addEventListener("keydown", (event) => {
       // Prevent Enter key from triggering line break in the editable title
       if (event.key === "Enter") {
@@ -102,16 +102,15 @@ document.addEventListener("click", (event) => {
         selectedTitle.blur();
       }
     });
-    
+
     selectedTitle.addEventListener("blur", () => {
       selectedTitle.contentEditable = false;
       selectedTitle.classList.remove("editable");
-      
+
       const newTitle = selectedTitle.textContent.trim();
       if (newTitle !== previousTitle) {
         entries[selectedEntryIndex].title = newTitle;
-        // Save the entry title to local storage
-        localStorage.setItem(`title_${entries[selectedEntryIndex].id}`, newTitle);
+        saveEntriesToLocalStorage();
       }
     });
   }
