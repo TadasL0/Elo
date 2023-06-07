@@ -11,5 +11,5 @@ function toggleSidePanel() {
   }
 }
 
-const toggleButton = document.getElementById('toggle-button');
+const toggleButton = document.querySelector('.toggle-button');
 toggleButton.addEventListener('click', toggleSidePanel);

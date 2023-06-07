@@ -1,92 +1,93 @@
-const entryList = document.getElementById("entry-list");
-let entries = [];
-let selectedEntryIndex = 0; // Index of the currently selected entry
+// Retrieve entries from local storage or initialize an empty array
+let entries = JSON.parse(localStorage.getItem("journalEntries")) || [];
 
-const renderEntryList = () => {
-  entryList.innerHTML = ""; // Clear the previous entries
+// Get the necessary DOM elements
+const entryList = document.getElementById("entry-list");
+const toggleButton = document.querySelector(".toggle-button");
+const sidePanel = document.getElementById("side-panel");
+const newEntryButton = document.querySelector(".new-entry-button");
+
+// Variable to keep track of the selected entry
+let selectedEntryIndex = null;
+
+// Function to render the entry list
+function renderEntryList() {
+  entryList.innerHTML = "";
 
   entries.forEach((entry, index) => {
-    const listItem = document.createElement("li");
-    listItem.classList.add("entry-item");
-
-    if (index === selectedEntryIndex) {
-      listItem.classList.add("selected");
-    }
-
-    const title = document.createElement("h3");
-    title.classList.add("entry-title");
-    title.textContent = entry.title;
-
-    listItem.appendChild(title);
-
-    listItem.addEventListener("click", () => {
+    const entryItem = document.createElement("li");
+    entryItem.className = "entry-item";
+    entryItem.textContent = entry.title;
+    entryItem.addEventListener("click", () => {
       selectEntry(index);
     });
 
-    entryList.appendChild(listItem);
+    entryList.appendChild(entryItem);
   });
-};
+}
 
-const createNewEntry = () => {
-  const newEntryId = Date.now();
-  const newEntry = { id: newEntryId, title: 'New Entry', content: '' };
-  entries.push(newEntry);
-  selectedEntryIndex = entries.length - 1;
-  renderEntryList();
-  selectEntry(selectedEntryIndex);
-  scrollToSelectedEntry();
-  saveEntriesToLocalStorage();
-};
-
-const selectEntry = (index) => {
-  if (index === selectedEntryIndex) {
-    return; // Already selected, no need to perform any action
-  }
-
-  const entryItems = document.querySelectorAll(".entry-item");
-  if (selectedEntryIndex >= 0 && selectedEntryIndex < entryItems.length) {
-    entryItems[selectedEntryIndex].classList.remove("selected");
-  }
-
+// Function to select an entry
+function selectEntry(index) {
   selectedEntryIndex = index;
 
-  if (selectedEntryIndex >= 0 && selectedEntryIndex < entryItems.length) {
-    entryItems[selectedEntryIndex].classList.add("selected");
+  entries.forEach((entry, i) => {
+    const entryItem = entryList.children[i];
+    if (i === index) {
+      entryItem.classList.add("selected");
+    } else {
+      entryItem.classList.remove("selected");
+    }
+  });
 
-    const journalEntry = document.getElementById("journal-entry");
-    journalEntry.value = entries[selectedEntryIndex].content || ""; // Set the textarea value to the selected entry's content
-  }
-};
+  const selectedEntry = entries[selectedEntryIndex];
+  document.getElementById("entry-title").textContent = selectedEntry.title;
+  document.getElementById("journal-entry").value = selectedEntry.content;
+}
 
-const saveEntriesToLocalStorage = () => {
-  localStorage.setItem("entries", JSON.stringify(entries));
-};
+// Function to create a new entry
+function createNewEntry() {
+  const newEntry = {
+    title: "New Entry",
+    content: "",
+  };
 
-const scrollToSelectedEntry = () => {
-  const selectedEntry = document.querySelector(".entry-item.selected");
-  if (selectedEntry) {
-    selectedEntry.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "start",
-    });
-  }
-};
+  entries.push(newEntry);
+  saveEntriesToLocalStorage();
+  renderEntryList();
+  selectEntry(entries.length - 1);
+}
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Retrieve entries from local storage if available
-  const storedEntries = localStorage.getItem("entries");
-  if (storedEntries) {
-    entries = JSON.parse(storedEntries);
-  } else {
-    // If no entries found in local storage, use default entry
-    entries = [
-      { id: 1, title: 'Default Entry', content: '' }
-    ];
-  }
+// Function to save entries to local storage
+function saveEntriesToLocalStorage() {
+  localStorage.setItem("journalEntries", JSON.stringify(entries));
+}
 
-  renderEntryList(); // Render the initial entry list
-  selectEntry(selectedEntryIndex);
+// Initialize the app
+renderEntryList();
+
+// Check if there are entries in the list
+if (entries.length > 0) {
+  selectEntry(0); // Select the first entry by default
+} else {
+  createNewEntry(); // Create a new entry if the list is empty
+}
+
+// Handle the event when the entry title is clicked
+document.getElementById("entry-title").addEventListener("click", () => {
+  const selectedEntry = entries[selectedEntryIndex];
+  const entryTitle = document.getElementById("entry-title");
+
+  // Add editable class to make the title editable
+  entryTitle.contentEditable = true;
+  entryTitle.classList.add("editable");
+
+  // Save the updated title when the user focuses out of the element
+  entryTitle.addEventListener("focusout", () => {
+    selectedEntry.title = entryTitle.textContent;
+    entryTitle.contentEditable = false;
+    entryTitle.classList.remove("editable");
+    saveEntriesToLocalStorage();
+  });
 });
 
 // Handle the event when the textarea input changes
@@ -95,33 +96,18 @@ document.getElementById("journal-entry").addEventListener("input", (event) => {
   saveEntriesToLocalStorage();
 });
 
-// Handle the event when the entry title is clicked
-document.addEventListener("click", (event) => {
-  if (event.target.classList.contains("entry-title") && event.target.tagName === "H3") {
-    const selectedTitle = event.target;
-    const previousTitle = selectedTitle.textContent;
+// Toggle the side panel when the toggle button is clicked
+toggleButton.addEventListener("click", () => {
+  sidePanel.classList.toggle("show-panel");
 
-    selectedTitle.contentEditable = true;
-    selectedTitle.classList.add("editable");
-    selectedTitle.focus();
-
-    selectedTitle.addEventListener("keydown", (event) => {
-      // Prevent Enter key from triggering line break in the editable title
-      if (event.key === "Enter") {
-        event.preventDefault();
-        selectedTitle.blur();
-      }
-    });
-
-    selectedTitle.addEventListener("blur", () => {
-      selectedTitle.contentEditable = false;
-      selectedTitle.classList.remove("editable");
-
-      const newTitle = selectedTitle.textContent.trim();
-      if (newTitle !== previousTitle) {
-        entries[selectedEntryIndex].title = newTitle;
-        saveEntriesToLocalStorage();
-      }
-    });
+  // Toggle visibility of entry items when side panel is closed
+  const entryItems = document.getElementsByClassName("entry-item");
+  for (let item of entryItems) {
+    item.classList.toggle("entry-visible");
   }
+});
+
+// Create new entry when the new entry button is clicked
+newEntryButton.addEventListener("click", () => {
+  createNewEntry();
 });
