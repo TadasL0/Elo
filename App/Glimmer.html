@@ -11,8 +11,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
+  <div id="loading-screen">
+    <div id="left-pane" class="loading-pane"></div>
+    <div id="right-pane" class="loading-pane"></div>
+  </div>
   <div id="side-panel" class="side-panel">
-    <div id="loading-screen"></div>
     <div class="new-entry-button" onclick="createNewEntry()"><i class="fas fa-plus"></i></div>
     <ul id="entry-list" class="entry-list"></ul>
     <div class="toggle-button" id="toggle-button"></div>  
@@ -30,6 +33,8 @@
       </div>   
     </div>
   </div>  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
   <script src="sidepanel.js"></script>
   <script src="savingfunctionality.js"></script>
   <script src="streak.js"></script>
