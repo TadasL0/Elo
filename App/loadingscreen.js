@@ -1,15 +1,15 @@
 window.addEventListener('DOMContentLoaded', (event) => {
-    const leftPane = document.getElementById('left-pane');
-    const rightPane = document.getElementById('right-pane');
-    const loadingScreen = document.getElementById('loading-screen');
-  
-    setTimeout(() => {
-      leftPane.style.transform = 'translateX(-100%)';
-      rightPane.style.transform = 'translateX(100%)';
-  
-      setTimeout(() => {
-        loadingScreen.parentNode.removeChild(loadingScreen);
-      }, 1000);
-    }, 1000);
-  });
-  
+  const sidePanel = document.getElementById('side-panel');
+  const sidePanelRect = sidePanel.getBoundingClientRect();
+
+  setTimeout(() => {
+    gsap.to("#loading-screen", {
+      duration: 2,
+      x: -window.innerWidth,
+      ease: "power2.out",
+    }).then(() => {
+      const loadingScreen = document.querySelector("#loading-screen");
+      loadingScreen.parentNode.removeChild(loadingScreen);
+    });
+  }, 500);
+});
