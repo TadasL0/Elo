@@ -4,43 +4,72 @@
   left: -250px;
   width: 300px;
   height: 100%;
-  background-color: #19022c;
+  background-color: #1B1B1A;
   padding: 20px;
   box-sizing: border-box;
   border: 4px solid #000000;
   transition: left 0.3s ease;
   z-index: 9999;
+  overflow-y: auto;
 }
 
 .show-panel {
   left: 0;
 }
 
+.show-panel .entry-item {
+  font-family: "Inter", sans-serif;
+}
+
 .panel-title {
   font-size: 20px;
   margin-bottom: 10px;
-  color: #ffffff;
+  color: #250d1d;
 }
 
 .entry-list {
   list-style-type: none;
   padding: 0;
-  margin: 0;
+  margin: 40px 0 0;
 }
 
 .entry-item {
-  margin-bottom: 20px;
+  cursor: pointer;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 3px;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s ease;
+  flex-grow: 1;
+  visibility: visible;
+}
+
+.entry-item:hover {
+  background-color: #bcbcbc;
+}
+
+.entry-item.selected {
+  background-color: #c0c0c0;
 }
 
 .entry-title {
+  cursor: pointer;
+  font-weight: bold;
+  font-family: "Inter", sans-serif;
   font-size: 18px;
   margin-bottom: 5px;
-  color: #ffffff;
+  color: #320f30;
+}
+
+.entry-title.editable {
+  outline: none;
+  border: none;
+  background: none;
 }
 
 .entry-content {
   font-size: 14px;
-  color: #555555;
+  color: #270505;
 }
 
 .toggle-button {
@@ -53,14 +82,35 @@
   cursor: pointer;
   border-radius: 50%;
   transition: background-color 0.3s ease, transform 0.3s;
-  border: 2px solid transparent; /* Add transparent border initially */
+  border: 2px solid transparent;
 }
 
 .toggle-button:hover {
   background-color: #dcdcdc;
-  transform: scale(1.2); /* Make the button slightly bigger on hover */
+  transform: scale(1.2);
 }
 
 .active {
   background-color: #ff0000;
+}
+
+.new-entry-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 20px;
+  height: 20px;
+  background-color: #ffffff;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 0.3s ease, transform 0.3s;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-entry-button:hover {
+  background-color: #dcdcdc;
+  transform: scale(1.2);
 }

@@ -1,56 +1,39 @@
-const currentDate = new Date().toLocaleDateString();  // Get the current date
+// savingfunctionality.js
 
-const saveEntry = async () => {
-  const entry = document.getElementById("journal-entry").value;
-  const data = {
-    title: `Diary Entry - ${currentDate}`,  // Add the current date to the title
-    content: entry,
-  };
+let autosaveTimer; // Variable to store the timer ID
 
-  try {
-    const response = await fetch("http://localhost:3000/api/entries", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+const autosaveEntry = async () => {
+  // Clear any previous timer
+  clearTimeout(autosaveTimer);
 
-    if (response.ok) {
-      console.log("Journal entry saved successfully");
-    } else {
-      console.error("Failed to save journal entry:", response.status);
+  // Set a new timer to trigger autosave after a brief delay
+  autosaveTimer = setTimeout(async () => {
+    const entry = document.getElementById("journal-entry").value;
+    const currentDate = new Date().toLocaleDateString(); // Get the current date
+
+    const data = {
+      title: `Diary Entry - ${currentDate}`, // Add the current date to the title
+      content: entry,
+    };
+
+    try {
+      const response = await fetch("http://localhost:3000/api/entries", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        console.log("Journal entry autosaved successfully");
+      } else {
+        console.error("Failed to autosave journal entry:", response.status);
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
     }
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
+  }, 1000); // Adjust the delay as needed (e.g., 1000ms = 1 second)
 };
 
-const condenseEntry = async () => {
-  const entry = document.getElementById("journal-entry").value;
-  const data = {
-    text: entry,
-  };
-
-  try {
-    const response = await fetch("http://localhost:3000/api/summary", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      const summary = await response.text();
-      console.log("Summary:", summary);
-    } else {
-      console.error("Failed to retrieve summary:", response.status);
-    }
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
-};
-
-document.getElementById("save-entry-button").addEventListener("click", saveEntry);
-document.getElementById("condense-button").addEventListener("click", condenseEntry);
+document.getElementById("journal-entry").addEventListener("input", autosaveEntry);
