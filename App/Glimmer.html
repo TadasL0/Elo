@@ -7,10 +7,12 @@
   <link rel="stylesheet" href="styling.css">
   <link rel="stylesheet" href="sidepanel.css">
   <link rel="stylesheet" href="streak.css">
+  <link rel="stylesheet" href="loadingscreen.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
   <div id="side-panel" class="side-panel">
+    <div id="loading-screen"></div>
     <div class="new-entry-button" onclick="createNewEntry()"><i class="fas fa-plus"></i></div>
     <ul id="entry-list" class="entry-list"></ul>
     <div class="toggle-button" id="toggle-button"></div>  
@@ -33,5 +35,6 @@
   <script src="streak.js"></script>
   <script src="createentry.js"></script>
   <script src="coloring_navbar.js"></script>
+  <script src="loadingscreen.js"></script>
 </body>
 </html>
