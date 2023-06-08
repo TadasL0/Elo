@@ -1,23 +1,10 @@
-// Highlight functionality
-function applyHighlightColor(colorClass) {
-  const journalEntry = document.getElementById('journal-entry');
-  const selectedText = window.getSelection().toString();
+window.applyHighlightColor = function(colorClass) {
+  // get selected text
+  let selectedText = window.getSelection();
 
-  if (selectedText !== '') {
-    const span = document.createElement('span');
-    span.classList.add(colorClass);
-    span.textContent = selectedText;
-
-    const range = window.getSelection().getRangeAt(0);
-    range.deleteContents();
-    range.insertNode(span);
-  }
+  // create a new span element, apply the class to it, and wrap it around the selected text
+  let span = document.createElement("span");
+  span.classList.add(colorClass);
+  let range = selectedText.getRangeAt(0);
+  range.surroundContents(span);
 }
-
-// JavaScript code to toggle the side panel
-const sidePanel = document.getElementById('side-panel');
-const toggleButton = document.querySelector('.toggle-button');
-
-toggleButton.addEventListener('click', () => {
-  sidePanel.classList.toggle('show-panel');
-});

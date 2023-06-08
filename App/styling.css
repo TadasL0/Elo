@@ -71,6 +71,14 @@ body::before {
   background-color: #64ff64;
 }
 
+.highlight-red span {
+  background: #FF8A80; /* Change as per your preference */
+}
+
+.highlight-green span {
+  background: #B9F6CA; /* Change as per your preference */
+}
+
 #save-entry-button,
 #condense-button {
   display: block;
