@@ -11,5 +11,5 @@ window.addEventListener('DOMContentLoaded', (event) => {
       const loadingScreen = document.querySelector("#loading-screen");
       loadingScreen.parentNode.removeChild(loadingScreen);
     });
-  }, 500);
+  }, 400);
 });
