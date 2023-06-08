@@ -17,6 +17,10 @@
   left: 0;
 }
 
+.show-panel .entry-item {
+  font-family: "Inter", sans-serif;
+}
+
 .panel-title {
   font-size: 20px;
   margin-bottom: 10px;
@@ -26,18 +30,18 @@
 .entry-list {
   list-style-type: none;
   padding: 0;
-  margin: 40px 0 0; /* Add top margin of 40px */
+  margin: 40px 0 0;
 }
 
 .entry-item {
   cursor: pointer;
   padding: 10px;
-  margin-top: 10px; /* Adjust the value as needed */
+  margin-top: 10px;
   margin-bottom: 3px;
   background-color: #f0f0f0;
   transition: background-color 0.3s ease;
-  flex-grow: 1; /* Make the entry items expand to fill the available space */
-  visibility: visible; /* Make the entry items visible */
+  flex-grow: 1;
+  visibility: visible;
 }
 
 .entry-item:hover {
@@ -49,22 +53,18 @@
 }
 
 .entry-title {
-  /* Add your desired styles for the entry title here */
   cursor: pointer;
   font-weight: bold;
   font-family: "Inter", sans-serif;
   font-size: 18px;
   margin-bottom: 5px;
   color: #320f30;
-  /* Add any other styles as needed */
 }
 
 .entry-title.editable {
-  /* Add styles for the editable entry title here */
   outline: none;
   border: none;
   background: none;
-  /* Add any other styles as needed */
 }
 
 .entry-content {
@@ -82,12 +82,12 @@
   cursor: pointer;
   border-radius: 50%;
   transition: background-color 0.3s ease, transform 0.3s;
-  border: 2px solid transparent; /* Add transparent border initially */
+  border: 2px solid transparent;
 }
 
 .toggle-button:hover {
   background-color: #dcdcdc;
-  transform: scale(1.2); /* Make the button slightly bigger on hover */
+  transform: scale(1.2);
 }
 
 .active {
@@ -105,8 +105,6 @@
   border-radius: 0;
   transition: background-color 0.3s ease, transform 0.3s;
   border: 2px solid transparent;
-
-  /* Center the content vertically and horizontally */
   display: flex;
   align-items: center;
   justify-content: center;
