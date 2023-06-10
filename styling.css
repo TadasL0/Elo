@@ -7,6 +7,10 @@ body, html {
   font-family: 'Inter', sans-serif;
 }
 
+.bold-text {
+  font-weight: 700;
+}
+
 body::before {
   content: "";
   position: absolute;
