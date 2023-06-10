@@ -1,4 +1,4 @@
 # Glimmer
-Advanced journalling.
+ Advanced journalling.
 
-Track your thoughts, earn skills by upgrading your cognition.
+ Log your problems and find your path.
