@@ -7,3 +7,8 @@
   left: 0;
   background-color: white;
 }
+
+/* As the loading screen usually covers the entire viewport, 
+we typically do not need to add media queries for it. 
+But if you have any specific changes for different devices, 
+you can add media queries in a similar way as shown in other files. */
