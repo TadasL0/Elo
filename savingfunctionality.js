@@ -8,7 +8,7 @@ const autosaveEntry = async () => {
 
   // Set a new timer to trigger autosave after a brief delay
   autosaveTimer = setTimeout(async () => {
-    const entry = document.getElementById("journal-entry").value;
+    const entry = document.getElementById("journal-entry").textContent;  // Changed from .value
     const currentDate = new Date().toLocaleDateString(); // Get the current date
 
     const data = {

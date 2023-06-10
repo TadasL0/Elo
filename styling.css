@@ -69,12 +69,13 @@ body::before {
 }
 
 .highlight-red {
-  background-color: #ff6464;
+  background-color: #d12e2e;
 }
 
 .highlight-green {
-  background-color: #64ff64;
+  background-color: #67f367;
 }
+
 
 .highlight-red span {
   background: #FF8A80; /* Change as per your preference */

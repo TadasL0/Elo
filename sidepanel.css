@@ -139,3 +139,8 @@
     left: 0;
   }
 }
+
+#journal-entry:empty:before {
+  content: attr(placeholder);
+  color: #000000;  /* Light grey, or another color to mimic a placeholder */
+}
