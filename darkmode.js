@@ -1,23 +1,6 @@
-document.getElementById('toggle-dark-mode').addEventListener('change', function(event) {
-    document.body.classList.toggle('dark-mode', event.target.checked);
+document.addEventListener('DOMContentLoaded', (event) => {
+  const toggleDarkMode = document.getElementById('toggle-dark-mode');
+  const body = document.querySelector('body');
+
+  toggleDarkMode.checked = true; // Setting Dark Mode as Default
 });
-
-const entryElement = document.getElementById('journal-entry');
-
-entryElement.addEventListener('input', autosaveEntry);
-
-// Load any saved entry from previous session
-loadSavedEntry();
-
-function autosaveEntry() {
-  const entryContent = entryElement.innerHTML;
-  localStorage.setItem('savedEntry', entryContent);
-}
-
-function loadSavedEntry() {
-  const savedEntry = localStorage.getItem('savedEntry');
-
-  if (savedEntry) {
-    entryElement.innerHTML = savedEntry;
-  }
-}
