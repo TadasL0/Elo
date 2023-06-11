@@ -58,6 +58,7 @@ body::before {
   outline: none;
   background-color: transparent;
   line-height: 1.5;
+  position: relative;
 }
 
 #journal-entry::placeholder {
@@ -156,4 +157,10 @@ body::before {
   .content {
     width: 80%;
   }
+}
+
+.toggle-container {
+  position: absolute; /* NEW: position this absolutely within #journal-entry */
+  top: 10px; /* adjust as needed */
+  right: 10px; /* adjust as needed */
 }
