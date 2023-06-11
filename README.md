@@ -1,4 +1,2 @@
 # Glimmer
- Advanced journalling.
-
- Log your problems and find your path.
+A dojo for your brain.
