@@ -198,19 +198,41 @@ body {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 20px;
-  height: 20px;
+  width: 34px;
+  height: 34px;
   background-color: #ffffff;
   cursor: pointer;
   border-radius: 50%;
   transition: background-color 0.3s ease, transform 0.3s;
   border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-button:before,
+.toggle-button:after,
+.toggle-button > div {
+  content: "";
+  display: block;
+  height: 16px;
+  width: 2px;
+  background-color: #000000;
+}
+
+.toggle-button:before {
+  margin-right: 5px;
+}
+
+.toggle-button:after {
+  margin-left: 5px;
 }
 
 .toggle-button:hover {
   background-color: #dcdcdc;
   transform: scale(1.2);
 }
+
 
 .active {
   background-color: #ff0000;
@@ -220,16 +242,26 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
-  width: 20px;
-  height: 20px;
+  width: 34px;
+  height: 34px;
   background-color: #ffffff;
   cursor: pointer;
-  border-radius: 0;
+  border-radius: 50%;
   transition: background-color 0.3s ease, transform 0.3s;
   border: 2px solid transparent;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.new-entry-button i {
+  color: #000000;
+  font-size: 16px;
+}
+
+.new-entry-button:hover {
+  background-color: #dcdcdc;
+  transform: scale(1.2);
 }
 
 .new-entry-button:hover {
