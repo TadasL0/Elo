@@ -35,6 +35,17 @@ body::before {
   font-weight: 700;
 }
 
+body.dark-mode {
+  /* set your dark mode styles here */
+  background-color: #252525;
+  color: #f5f5f5;
+}
+
+body.dark-mode #journal-entry {
+  background-color: #252525;
+  color: #f5f5f5;
+}
+
 .content {
   position: relative;
   width: 100%;
@@ -59,6 +70,7 @@ body::before {
   background-color: transparent;
   line-height: 1.5;
   position: relative;
+  border-radius: 20px;
 }
 
 #journal-entry::placeholder {
@@ -77,62 +89,6 @@ body::before {
   cursor: pointer;
   border-radius: 50%;
   transition: background-color 0.3s ease;
-}
-
-#save-entry-button,
-#condense-button {
-  display: block;
-  width: 150px;
-  height: 40px;
-  background-color: #3db8e3;
-  color: #ffffff;
-  font-size: 16px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s;
-}
-
-#save-entry-button:hover,
-#condense-button:hover {
-  background-color: #00a8d8;
-}
-
-#save-entry-button:focus,
-#condense-button:focus {
-  outline: none;
-}
-
-#save-entry-button:active,
-#condense-button:active {
-  background-color: #0088b4;
-}
-
-.panel-title, .entry-title {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #ffffff;
-}
-
-.entry-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-.entry-item {
-  margin-bottom: 20px;
-}
-
-.entry-content {
-  font-size: 14px;
-  color: #555555;
-}
-
-.button-container {
-  display: flex;
-  justify-content: flex-start;
 }
 
 #streak {
@@ -160,7 +116,74 @@ body::before {
 }
 
 .toggle-container {
-  position: absolute; /* NEW: position this absolutely within #journal-entry */
-  top: 10px; /* adjust as needed */
-  right: 10px; /* adjust as needed */
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 60px;
+  height: 30px;
+}
+
+.toggle-checkbox {
+  display: none;
+}
+
+.toggle-label {
+  position: relative;
+  display: block;
+  height: 100%;
+  background: #1e2135;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.toggle-label .toggle-switch {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translate(0, -50%);
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.2s ease-in-out;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+  background: #4a56e2;
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-switch {
+  transform: translate(100%, -50%);
+}
+
+body.dark-mode {
+    /* set your dark mode styles here */
+    background-color: #252525;
+    color: #f5f5f5;
+}
+
+body.dark-mode #journal-entry {
+    background-color: #252525;
+    color: #f5f5f5;
+}
+
+.toggle-label i {
+  display: none;
+}
+
+.toggle-checkbox:checked + .toggle-label .fa-moon {
+  display: inline-block;
+  position: absolute;
+  left: 65%;
+  top: 25%;
+  color: white;
+}
+
+.toggle-checkbox:not(:checked) + .toggle-label .fa-sun {
+  display: inline-block;
+  position: absolute;
+  left: 10%;
+  top: 25%;
+  color: white;
 }
