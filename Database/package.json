@@ -1,7 +1,7 @@
 {
-  "name": "glimmer",
+  "name": "skill",
   "version": "1.0.0",
-  "description": "A journalling app for enhanced cognitive ability.",
+  "description": "A dojo for your brain.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TadasL0/Glimmer.git"
+    "url": "git+https://github.com/TadasL0/Skill.git"
   },
   "author": "Tadas",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TadasL0/Glimmer/issues"
+    "url": "https://github.com/TadasL0/Skill/issues"
   },
-  "homepage": "https://github.com/TadasL0/Glimmer#readme",
+  "homepage": "https://github.com/TadasL0/Skill#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
