@@ -58,6 +58,8 @@ body {
   box-sizing: border-box;
   border-radius: 4px;
   transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;  /* Required for z-index to work properly */
+  z-index: 10000;  /* Adjust this value as needed */
 }
 
 /* ==================== Dark/Light Toggle Styles ==================== */
@@ -229,6 +231,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.toggle-button {
+  /* Add other properties above this line */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);  /* Adjust this value as needed */
 }
 
 .toggle-button:before,
