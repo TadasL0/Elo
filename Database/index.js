@@ -11,12 +11,16 @@ app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
 
 const pool = new Pool({
-  user: "postgres",
-  password: "tadas",
-  host: "localhost",
-  port: 5432,
-  database: "postgres",
+  user: "doadmin",
+  password: "AVNS_yi0xpD4QBIM-Psf2CvW",
+  host: "db-postgresql-fra1-82627-do-user-14222007-0.b.db.ondigitalocean.com",
+  port: "25060",
+  database: "defaultdb",
+  ssl: {
+    rejectUnauthorized: false
+  },
 });
+
 
 // Connect to PostgreSQL
 async function connectToDatabase() {
