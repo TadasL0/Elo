@@ -3,6 +3,7 @@ const express = require("express");
 const { Pool } = require("pg");
 const cors = require("cors");
 const apiRouter = require("./apiRouter");
+require('dotenv').config();
 
 const app = express();
 
@@ -11,11 +12,11 @@ app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
 
 const pool = new Pool({
-  user: "doadmin",
-  password: "AVNS_yi0xpD4QBIM-Psf2CvW",
-  host: "db-postgresql-fra1-82627-do-user-14222007-0.b.db.ondigitalocean.com",
-  port: "25060",
-  database: "defaultdb",
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  database: process.env.DB_NAME,
   ssl: {
     rejectUnauthorized: false
   },
@@ -34,6 +35,9 @@ async function connectToDatabase() {
 
 connectToDatabase();
 
+// Register the API routes
+app.use("/api", apiRouter);
+
 app.post("/api/entries", (req, res) => {
   const { title, content } = req.body;
 
@@ -51,11 +55,6 @@ app.post("/api/entries", (req, res) => {
       }
     }
   );
-});
-
-app.get("/api/entries", (req, res) => {
-  // Handle GET request logic here
-  res.json({ message: "GET request received for /api/entries" });
 });
 
 // Start the server
