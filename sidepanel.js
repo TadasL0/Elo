@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   // Adjust the left property when the button is clicked
   toggleButton.addEventListener('click', () => {
       if (sidePanel.style.left === "0px") {
-          sidePanel.style.left = `-${sidePanelWidth - 63}px`;  // Leaving 50px visible
+          sidePanel.style.left = `-${sidePanelWidth - 72}px`;  // Leaving 50px visible
       } else {
           sidePanel.style.left = "0px";
       }
