@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Responsive viewport -->
   <title>Skill</title>
   <link rel="icon" type="image/png" href="assets/glimmer_v2.svg">
+  <link rel="stylesheet" href="settings.css">
   <link rel="stylesheet" href="styling.css">
   <link rel="stylesheet" href="sidepanel.css">
   <link rel="stylesheet" href="streak.css">
@@ -25,6 +26,18 @@
     </div>     
   </div>
   <div class="container">
+    <!-- Add the settings button here -->
+    <div id="settings-button" onclick="toggleSettingsPanel()">
+        <i class="fas fa-cog"></i>
+    </div>
+    <!-- ... the rest of your container's content ... -->
+    </div>
+
+    <!-- Add the settings panel here -->
+    <div id="settings-panel" class="settings-panel hide-panel">
+    <!-- ... settings content goes here ... -->
+    </div>
+    <div class="container">
     <div class="content">
       <div class="toggle-container">
         <input type="checkbox" id="toggle-dark-mode" class="toggle-checkbox">
