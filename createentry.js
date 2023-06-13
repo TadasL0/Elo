@@ -91,7 +91,6 @@ class Journal {
 
   // Function to toggle side panel
   toggleSidePanel() {
-    console.log("Toggle button clicked!"); // For debugging
     this.sidePanel.classList.toggle('show-panel');
     const entryItems = document.getElementsByClassName('entry-item');
     for (let item of entryItems) {
