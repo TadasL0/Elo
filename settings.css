@@ -1,27 +1,27 @@
-#settings-button {
-    position: absolute;
+#custom-settings-container {
+    position: fixed;
     top: 10px;
     right: 10px;
-    color: #f5f5f5;
+  }
+  
+  #custom-settings-icon {
+    font-size: 1.5em; /* Adjust this value as needed */
     cursor: pointer;
-    font-size: 24px;
-    z-index: 2000; /* z-index to make sure it's visible over other elements */
-}
-
-.settings-panel {
+    z-index: 1000;
+  }
+  
+  #custom-settings-panel {
     position: fixed;
-    top: 0;
-    right: 0;
-    width: 300px; /* width of the settings panel */
-    height: 100vh; /* full height of the viewport */
-    background-color: var(--content-background-color);
-    padding: 20px;
-    border-left: 4px solid var(--content-border-color);
-    overflow: auto; /* allow scroll if content overflows */
-    transition: transform 0.3s ease; /* smooth slide in/out transition */
-    z-index: 1500; /* z-index to ensure it's above other content, but below the settings button */
-}
-
-.settings-panel.hide-panel {
-    transform: translateX(100%); /* initially hide panel off-screen */
-}
+    top: 40px; /* slightly below the icon */
+    right: 10px; /* same as the container */
+    width: 250px; /* Adjust width as needed */
+    height: 80vh; /* Adjust height as needed */
+    background: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    transform: scaleY(0);
+    transform-origin: top right;
+    transition: transform 0.3s ease-in-out;
+    overflow: hidden;
+    border: 2px black;
+  }
+  
