@@ -15,7 +15,7 @@ const autosaveEntry = async () => {
     };
 
     try {
-      const response = await fetch("http://159.65.123.253:3000/api/entries", {
+      const response = await fetch("http://app.skill.dojo:3000/api/entries", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
