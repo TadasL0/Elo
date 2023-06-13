@@ -322,3 +322,13 @@ body {
   content: attr(placeholder);
   color: var(--placeholder-color);
 }
+
+#side-panel .entry-list {
+  /* Initially, make the entries visible */
+  opacity: 1;
+
+  /* Add a transition to smoothly animate the opacity */
+  transition: opacity 0.5s;
+}
+
+
