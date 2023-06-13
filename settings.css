@@ -23,5 +23,15 @@
     transition: transform 0.3s ease-in-out;
     overflow: hidden;
     border: 2px black;
+    border-radius: 20px;
   }
   
+  #custom-settings-icon.spin {
+    animation: spin 0.5s linear forwards;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
