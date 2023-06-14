@@ -12,34 +12,28 @@ function toggleCustomSettingsPanel() {
   settingsPanel.classList.toggle('open');
 }
 
-
-// Make sure the DOM is fully loaded before initializing Sortable
 document.addEventListener("DOMContentLoaded", function() {
-  new Sortable(document.getElementById('sortable-question-list'), {
-      animation: 150,
+  var fixedList = document.getElementById('sortable-fixed-list');
+  var editableList = document.getElementById('sortable-editable-list');
+
+  new Sortable(fixedList, {
+    group: 'shared',
+    animation: 150,
+    fallbackOnBody: true,
+    swapThreshold: 0.65,
+    onAdd: function (evt) {
+      if (fixedList.children.length > 5) {
+        editableList.appendChild(fixedList.children[5]);
+        editableList.lastChild.setAttribute('contenteditable', 'true');
+      }
+    }
+  });
+
+  new Sortable(editableList, {
+    group: 'shared',
+    animation: 150,
+    fallbackOnBody: true,
+    swapThreshold: 0.65
   });
 });
 
-new Sortable(document.getElementById('sortable-question-list'), {
-  animation: 150,
-  store: {
-    /**
-     * Get the order of elements. Called once during initialization.
-     * @param   {Sortable}  sortable
-     * @returns {Array}
-     */
-    get: function (sortable) {
-      var order = localStorage.getItem(sortable.options.group.name);
-      return order ? order.split('|') : [];
-    },
-
-    /**
-     * Save the order of elements. Called onEnd (when the item is dropped).
-     * @param {Sortable}  sortable
-     */
-    set: function (sortable) {
-      var order = sortable.toArray();
-      localStorage.setItem(sortable.options.group.name, order.join('|'));
-    }
-  }
-});

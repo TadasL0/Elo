@@ -54,4 +54,29 @@
     color: #fff; /* Change the text color to white for visibility against dark background */
   }
   
+  .sortable-list {
+    max-height: 45vh;
+    overflow-y: auto;
+    list-style: none; /* This will remove the bullet points */
+    padding-left: 0;
+  }
+  
+  .sortable-list li {
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #555;
+    border-radius: 5px;
+    cursor: move;
+    color: #fff;
+  }
+  
+  #sortable-fixed-list, #sortable-editable-list {
+    overflow: auto;
+    scrollbar-width: none; /* For Firefox */
+  }
+
+  #sortable-fixed-list::-webkit-scrollbar, #sortable-editable-list::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari and Opera */
+  }
+
   
