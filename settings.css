@@ -12,17 +12,17 @@
 
 #custom-settings-panel {
   position: fixed;
-  top: 40px; /* slightly below the icon */
-  right: -260px; /* start from offscreen */
-  width: 250px; /* Adjust width as needed */
-  height: 80.5vh; /* Adjust height as needed */
-  background: white;
+  top: 40px;
+  right: -250px;
+  width: 250px;
+  height: 80.5vh;
+  background: #333; /* This is a dark gray color */
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  transition: right 0.3s ease-in-out;
-  overflow: hidden;
-  border: 2px solid black;
+  transition: transform 0.3s ease-in-out, right 0.3s ease-in-out;
+  overflow: auto; 
+  padding: 10px; /* Added padding so the entries aren't bouncing into the sides */
+  color: #fff; /* Change the text color to white for visibility against dark background */
   border-radius: 20px;
-  pointer-events: none; /* disable interactions when hidden */
 }
 
 #custom-settings-panel.open {
@@ -42,15 +42,16 @@
   #sortable-question-list {
     list-style-type: none;
     padding: 0;
-    background-color: black;
+    background-color: rgb(65, 65, 65);
   }
   
   #sortable-question-list li {
     padding: 10px;
     margin-bottom: 5px;
-    background-color: #494949;
+    background-color: #555; /* This is a slightly lighter gray for the questions */
     border-radius: 5px;
     cursor: move;
+    color: #fff; /* Change the text color to white for visibility against dark background */
   }
   
   
