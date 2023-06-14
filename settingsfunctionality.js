@@ -12,28 +12,29 @@ function toggleCustomSettingsPanel() {
   settingsPanel.classList.toggle('open');
 }
 
+// Make sure the DOM is fully loaded before initializing Sortable
 document.addEventListener("DOMContentLoaded", function() {
   var fixedList = document.getElementById('sortable-fixed-list');
   var editableList = document.getElementById('sortable-editable-list');
 
-  new Sortable(fixedList, {
-    group: 'shared',
+  Sortable.create(fixedList, {
+    group: 'shared', 
     animation: 150,
-    fallbackOnBody: true,
-    swapThreshold: 0.65,
+    draggable: '.sortable-item', // specifying draggable elements
     onAdd: function (evt) {
       if (fixedList.children.length > 5) {
         editableList.appendChild(fixedList.children[5]);
-        editableList.lastChild.setAttribute('contenteditable', 'true');
       }
-    }
+    },
   });
 
-  new Sortable(editableList, {
-    group: 'shared',
+  Sortable.create(editableList, {
+    group: 'shared', 
     animation: 150,
-    fallbackOnBody: true,
-    swapThreshold: 0.65
+    draggable: '.sortable-item', // specifying draggable elements
+    onAdd: function (evt) {
+      var item = editableList.children[evt.newIndex];
+      item.setAttribute('contenteditable', 'true');
+    },
   });
 });
-
