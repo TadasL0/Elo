@@ -2,12 +2,13 @@
   position: fixed;
   top: 10px;
   right: 10px;
+  z-index: 9999; /* Add this line */
 }
 
 #custom-settings-icon {
   font-size: 1.5em; /* Adjust this value as needed */
   cursor: pointer;
-  z-index: 1000;
+  z-index: 10000; /* Increase this value so the icon is above the container */
 }
 
 #custom-settings-panel {
@@ -23,7 +24,9 @@
   padding: 10px; /* Added padding so the entries aren't bouncing into the sides */
   color: #fff; /* Change the text color to white for visibility against dark background */
   border-radius: 20px;
+  z-index: 9999; /* Add this line */
 }
+
 
 #custom-settings-panel.open {
   right: 0;
