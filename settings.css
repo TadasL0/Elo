@@ -1,14 +1,44 @@
+:root {
+  --background-color: #1F1F1E;
+  --text-color: #f5f5f5;
+  --content-background-color: #f5f5f5;
+  --entry-color: #252525;
+  --placeholder-color: #000000;
+  --panel-background-color: #424242;
+  --entry-text-color: #000000; /* Dark text for light mode */
+  --entry-background-color: #ffffff; /* Light background for light mode */
+  --settings-background-color: #ffffff;
+  --settings-text-color: #000000;
+  --settings-question-background-color: #eeeeee;
+}
+
+body.dark-mode {
+  --background-color: #000000;
+  --text-color: #ffffff;
+  --content-background-color: #353535;
+  --entry-color: #ffffff;
+  --placeholder-color: #cccccc;
+  --panel-background-color: #212121;
+  --entry-text-color: #ffffff; /* Light text for dark mode */
+  --entry-background-color: #353535; /* Dark background for dark mode */
+  --settings-background-color: #333333;
+  --settings-text-color: #ffffff;
+  --settings-question-background-color: #555555;
+}
+
+/* ...existing styles... */
+
 #custom-settings-container {
   position: fixed;
   top: 10px;
   right: 10px;
-  z-index: 9999; /* Add this line */
+  z-index: 9999;
 }
 
 #custom-settings-icon {
-  font-size: 1.5em; /* Adjust this value as needed */
+  font-size: 1.5em;
   cursor: pointer;
-  z-index: 10000; /* Increase this value so the icon is above the container */
+  z-index: 10000;
 }
 
 #custom-settings-panel {
@@ -17,69 +47,58 @@
   right: -250px;
   width: 250px;
   height: 80.5vh;
-  background: #333; /* This is a dark gray color */
+  background: var(--settings-background-color);
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   transition: transform 0.3s ease-in-out, right 0.3s ease-in-out;
   overflow: auto; 
-  padding: 10px; /* Added padding so the entries aren't bouncing into the sides */
-  color: #fff; /* Change the text color to white for visibility against dark background */
+  padding: 10px;
+  color: var(--settings-text-color);
   border-radius: 20px;
-  z-index: 9999; /* Add this line */
+  z-index: 9999;
 }
-
 
 #custom-settings-panel.open {
   right: 0;
-  pointer-events: auto; /* enable interactions when shown */
+  pointer-events: auto;
 }
 
-  #custom-settings-icon.spin {
-    animation: spin 0.3s linear forwards;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+#custom-settings-icon.spin {
+  animation: spin 0.3s linear forwards;
 }
 
-  #sortable-question-list {
-    list-style-type: none;
-    padding: 0;
-    background-color: rgb(65, 65, 65);
-  }
-  
-  #sortable-question-list li {
-    padding: 10px;
-    margin-bottom: 5px;
-    background-color: #555; /* This is a slightly lighter gray for the questions */
-    border-radius: 5px;
-    cursor: move;
-    color: #fff; /* Change the text color to white for visibility against dark background */
-  }
-  
-  .sortable-list {
-    max-height: 45vh;
-    overflow-y: auto;
-    list-style: none; /* This will remove the bullet points */
-    padding-left: 0;
-  }
-  
-  .sortable-list li {
-    padding: 10px;
-    margin-bottom: 5px;
-    background-color: #555;
-    border-radius: 5px;
-    cursor: move;
-    color: #fff;
-  }
-  
-  #sortable-fixed-list, #sortable-editable-list {
-    overflow: auto;
-    scrollbar-width: none; /* For Firefox */
-  }
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
-  #sortable-fixed-list::-webkit-scrollbar, #sortable-editable-list::-webkit-scrollbar {
-    display: none; /* For Chrome, Safari and Opera */
-  }
+#sortable-question-list {
+  list-style-type: none;
+  padding: 0;
+  background-color: var(--settings-question-background-color);
+}
 
-  
+#sortable-question-list li,
+.sortable-list li {
+  padding: 10px;
+  margin-bottom: 5px;
+  background-color: var(--settings-question-background-color);
+  border-radius: 5px;
+  cursor: move;
+  color: var(--settings-text-color);
+}
+
+.sortable-list {
+  max-height: 45vh;
+  overflow-y: auto;
+  list-style: none;
+  padding-left: 0;
+}
+
+#sortable-fixed-list, #sortable-editable-list {
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+#sortable-fixed-list::-webkit-scrollbar, #sortable-editable-list::-webkit-scrollbar {
+  display: none;
+}
