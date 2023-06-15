@@ -13,7 +13,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     visiblePortion = window.innerWidth * 0.07; // Adjust this value as needed
   } else {
     // If the viewport is more than 600px, use the original value
-    visiblePortion = window.innerWidth * 0.06;
+    visiblePortion = window.innerWidth * 0.04;
   }
 
   // Set initial style for the side panel as closed
