@@ -7,7 +7,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
   const sidePanelWidth = sidePanel.offsetWidth;
 
   // Calculate the visible portion as a percentage of the window width
-  const visiblePortion = window.innerWidth * 0.06; // This is 10%. Adjust the value as needed.
+  let visiblePortion;
+  if (window.matchMedia("(max-width: 600px)").matches) {
+    // If the viewport is 600px or less, make the side panel poke out more
+    visiblePortion = window.innerWidth * 0.2; // Adjust this value as needed
+  } else {
+    // If the viewport is more than 600px, use the original value
+    visiblePortion = window.innerWidth * 0.06;
+  }
 
   // Set initial style for the side panel as closed
   sidePanel.style.left = `-${sidePanelWidth - visiblePortion}px`;
