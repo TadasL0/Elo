@@ -10,7 +10,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   let visiblePortion;
   if (window.matchMedia("(max-width: 600px)").matches) {
     // If the viewport is 600px or less, make the side panel poke out more
-    visiblePortion = window.innerWidth * 0.07; // Adjust this value as needed
+    visiblePortion = window.innerWidth * 0.15; // Adjust this value as needed
   } else {
     // If the viewport is more than 600px, use the original value
     visiblePortion = window.innerWidth * 0.06;

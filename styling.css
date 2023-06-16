@@ -47,7 +47,6 @@ body.dark-mode #journal-entry {
 }
 
 .content {
-  left: 31px;
   position: relative;
   width: 100%;
   max-width: 993px;

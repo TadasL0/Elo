@@ -94,6 +94,12 @@ body.dark-mode {
   padding-left: 0;
 }
 
+textarea {
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+}
+
 #sortable-fixed-list, #sortable-editable-list {
   overflow: auto;
   scrollbar-width: none;
