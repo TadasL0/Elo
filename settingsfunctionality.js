@@ -88,3 +88,18 @@ document.addEventListener("DOMContentLoaded", function() {
   // Load the order when the page loads
   loadOrder();
 });
+
+window.onload = function() {
+  loadOrder();
+  changeQuestion();
+  document.getElementById('journal-entry').focus(); // Set focus to textarea
+};
+
+// Everything else remains the same...
+
+// Then, your event listener will look like this:
+document.getElementById('journal-entry').addEventListener('input', function() {
+  if (!this.value) {
+      changeQuestion();
+  }
+});

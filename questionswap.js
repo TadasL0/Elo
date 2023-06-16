@@ -78,4 +78,9 @@ loadOrder();
 changeQuestion();
 
 // Change the question when the 'journal-entry' textarea gets focus
-document.getElementById('journal-entry').addEventListener('focus', changeQuestion);
+document.getElementById('journal-entry').addEventListener('input', function() {
+    if (!this.value) {
+        changeQuestion();
+    }
+});
+
