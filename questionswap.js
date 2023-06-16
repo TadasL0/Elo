@@ -74,10 +74,8 @@ function changeQuestion() {
 }
 
 // Load the order and change the question when the page loads
-window.onload = function() {
-    loadOrder();
-    changeQuestion();
-};
+loadOrder();
+changeQuestion();
 
 // Change the question when the 'journal-entry' textarea gets focus
 document.getElementById('journal-entry').addEventListener('focus', changeQuestion);
