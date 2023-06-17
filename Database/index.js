@@ -13,8 +13,10 @@ app.use(cors({
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,  // This allows the session cookie to be sent back and forth
+  exposedHeaders: ['Access-Control-Allow-Origin'], // Add this line
   optionsSuccessStatus: 200
 }));
+
 
 app.use(express.json());
 
