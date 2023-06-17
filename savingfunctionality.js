@@ -15,7 +15,7 @@ const autosaveEntry = async () => {
     };
 
     try {
-      const response = await fetch("https://app.eloskill.com:3000/api/entries", {
+      const response = await fetch("https://app.eloskill.com/api/entries", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
