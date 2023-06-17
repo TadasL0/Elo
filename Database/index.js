@@ -2,7 +2,7 @@
 const express = require("express");
 const { Pool } = require("pg");
 const cors = require("cors");
-const apiRouter = require("./apiRouter");
+const createApiRouter = require("./apiRouter");
 require('dotenv').config();
 
 const app = express();
@@ -29,16 +29,30 @@ async function connectToDatabase() {
     console.log("Connected to PostgreSQL");
   } catch (error) {
     console.error("Error connecting to PostgreSQL:", error);
+    setTimeout(connectToDatabase, 5000); // Try again after 5 seconds
   }
 }
 
 connectToDatabase();
 
 // Register the API routes
-app.use("/api", apiRouter);
+const apiRouter = createApiRouter(pool); // Pass the pool to create the router
+app.use("/api", cors(), apiRouter); // Apply CORS specifically on your API routes
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
 
 // Start the server
-const port = 3001;
+const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+});
+
+// Catch unhandled Promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  process.exit(1);
 });
