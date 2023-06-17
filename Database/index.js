@@ -8,7 +8,14 @@ require('dotenv').config();
 const app = express();
 
 // Middleware
-app.use(cors()); // Enable CORS for all routes
+app.use(cors({
+  origin: 'https://eloskill.com', // or the specific origin you want to give access to
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,  // This allows the session cookie to be sent back and forth
+  optionsSuccessStatus: 200
+}));
+
 app.use(express.json());
 
 const pool = new Pool({
