@@ -1,14 +1,14 @@
 // Import the Sortable library
-var Sortable = require('sortablejs');
+import Sortable from 'sortablejs';
 
 // Reference to the lists
-var fixedList = document.getElementById('sortable-fixed-list');
-var editableList = document.getElementById('sortable-editable-list');
+const fixedList = document.getElementById('sortable-fixed-list');
+const editableList = document.getElementById('sortable-editable-list');
 
 // Function to store lists order to local storage
 function storeOrder() {
-    var fixedOrder = Array.from(fixedList.children).map(li => li.textContent);
-    var editableOrder = Array.from(editableList.children).map(li => li.textContent);
+    const fixedOrder = Array.from(fixedList.children).map(li => li.textContent);
+    const editableOrder = Array.from(editableList.children).map(li => li.textContent);
 
     localStorage.setItem('fixedOrder', JSON.stringify(fixedOrder));
     localStorage.setItem('editableOrder', JSON.stringify(editableOrder));
@@ -16,8 +16,8 @@ function storeOrder() {
 
 // Function to load lists order from local storage
 function loadOrder() {
-    var fixedOrder = JSON.parse(localStorage.getItem('fixedOrder'));
-    var editableOrder = JSON.parse(localStorage.getItem('editableOrder'));
+    const fixedOrder = JSON.parse(localStorage.getItem('fixedOrder'));
+    const editableOrder = JSON.parse(localStorage.getItem('editableOrder'));
 
     if (fixedOrder) {
         // Remove existing items
@@ -26,8 +26,8 @@ function loadOrder() {
         }
 
         // Add items from the stored order
-        fixedOrder.forEach(function (question) {
-            var li = document.createElement('li');
+        fixedOrder.forEach(question => {
+            const li = document.createElement('li');
             li.textContent = question;
             li.className = 'sortable-item';
             fixedList.appendChild(li);
@@ -41,8 +41,8 @@ function loadOrder() {
         }
 
         // Add items from the stored order
-        editableOrder.forEach(function (question) {
-            var li = document.createElement('li');
+        editableOrder.forEach(question => {
+            const li = document.createElement('li');
             li.className = 'sortable-item';
             li.innerHTML = `<span class="drag-handle"></span> <span contenteditable="true">${question}</span>`;
             editableList.appendChild(li);
@@ -51,19 +51,19 @@ function loadOrder() {
 }
 
 // Initialize Sortable on the lists
-Sortable.create(fixedList, { animation: 150, onEnd: storeOrder });
-Sortable.create(editableList, { animation: 150, handle: '.drag-handle', onEnd: storeOrder });
+new Sortable(fixedList, { animation: 150, onEnd: storeOrder });
+new Sortable(editableList, { animation: 150, handle: '.drag-handle', onEnd: storeOrder });
 
 // Function to change the question
 function changeQuestion() {
-    var fixedOrder = JSON.parse(localStorage.getItem('fixedOrder')) || [];
-    var editableOrder = JSON.parse(localStorage.getItem('editableOrder')) || [];
-    var questions = fixedOrder.concat(editableOrder);
-    var total = questions.length;
-    var weights = questions.map((_, i) => total - i); // Higher index, higher chance
-    var randomIndex = Math.floor(Math.random() * weights.reduce((a, b) => a + b, 0));
+    const fixedOrder = JSON.parse(localStorage.getItem('fixedOrder')) || [];
+    const editableOrder = JSON.parse(localStorage.getItem('editableOrder')) || [];
+    const questions = fixedOrder.concat(editableOrder);
+    const total = questions.length;
+    const weights = questions.map((_, i) => total - i); // Higher index, higher chance
+    let randomIndex = Math.floor(Math.random() * weights.reduce((a, b) => a + b, 0));
 
-    for (var i = 0; i < weights.length; i++) {
+    for (let i = 0; i < weights.length; i++) {
         if (randomIndex < weights[i]) {
             document.getElementById('journal-entry').placeholder = questions[i];
             break;
@@ -83,4 +83,3 @@ document.getElementById('journal-entry').addEventListener('input', function() {
         changeQuestion();
     }
 });
-
