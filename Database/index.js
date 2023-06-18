@@ -18,7 +18,12 @@ app.use(cors({
 }));
 
 
-app.use(express.json());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:5500');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 
 const pool = new Pool({
   user: process.env.DB_USER,
