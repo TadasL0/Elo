@@ -1,24 +1,26 @@
-let autosaveTimer; // Variable to store the timer ID
+let autosaveTimer;
 
-// Function to autosave an entry
 const autosaveEntry = () => {
   if (autosaveTimer) clearTimeout(autosaveTimer);
 
   autosaveTimer = setTimeout(() => {
     const entry = document.getElementById("journal-entry").value;
 
-    if (entry.trim() !== "") {  // Check if entry is not empty
+    if (entry.trim() !== "" && entry.length <= 5000) {  // Check if entry is not empty and not too long
       const data = buildEntryData(entry);
       saveEntry(data);
     }
 
-    saveToLocalStore("journalEntry", entry);
+    try {
+      saveToLocalStore("journalEntry", entry);
+    } catch (error) {
+      console.error("An error occurred while saving to Local Storage:", error);
+    }
   }, 1000);
 };
 
-// Function to build the entry data
 const buildEntryData = (entry) => {
-  const currentDate = new Date().toLocaleDateString(); // Get the current date
+  const currentDate = new Date().toLocaleDateString();
   const data = {
     title: `Diary Entry - ${currentDate}`,
     content: entry,
@@ -27,7 +29,6 @@ const buildEntryData = (entry) => {
   return data;
 };
 
-// Function to save an entry
 const saveEntry = async (data) => {
   try {
     const response = await fetch("https://app.eloskill.com/api/entries", {
@@ -41,29 +42,40 @@ const saveEntry = async (data) => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    console.log("Journal entry autosaved successfully");
+
+    const responseData = await response.json();
+    console.log("Journal entry autosaved successfully:", responseData);
   } catch (error) {
     console.error("An error occurred while saving the entry:", error);
   }
 };
 
-// Function to save to local storage
 const saveToLocalStore = (key, value) => {
-  localStorage.setItem(key, value);
+  try {
+    localStorage.setItem(key, value);
+  } catch (error) {
+    throw new Error(`Failed to save to Local Storage: ${error}`);
+  }
 };
 
-// Function to load from local storage
 const loadFromLocalStore = (key) => {
-  return localStorage.getItem(key);
+  try {
+    return localStorage.getItem(key);
+  } catch (error) {
+    throw new Error(`Failed to load from Local Storage: ${error}`);
+  }
 };
 
-// Ensure that the DOM is fully loaded before attaching the event listener
 document.addEventListener('DOMContentLoaded', () => {
   const journalEntryElement = document.getElementById("journal-entry");
   journalEntryElement.addEventListener("input", autosaveEntry);
   
-  const savedEntry = loadFromLocalStore("journalEntry");
-  if (savedEntry) {
-    journalEntryElement.value = savedEntry;
+  try {
+    const savedEntry = loadFromLocalStore("journalEntry");
+    if (savedEntry) {
+      journalEntryElement.value = savedEntry;
+    }
+  } catch (error) {
+    console.error("An error occurred while loading from Local Storage:", error);
   }
 });
