@@ -297,27 +297,6 @@ body {
   transform: scale(1.2);
 }
 
-@media only screen and (max-width: 600px) {
-  .side-panel {
-    width: 100%;
-    left: 0;
-  }
-}
-
-@media only screen and (min-width: 601px) {
-  .side-panel {
-    width: 60%;
-    left: 0;
-  }
-}
-
-@media only screen and (min-width: 993px) {
-  .side-panel {
-    width: 300px;
-    left: 0;
-  }
-}
-
 #journal-entry:empty:before {
   content: attr(placeholder);
   color: var(--placeholder-color);
