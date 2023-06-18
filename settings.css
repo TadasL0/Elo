@@ -36,7 +36,7 @@ body.dark-mode {
 }
 
 #custom-settings-icon {
-  font-size: 1.3em;
+  font-size: 1.5em;
   cursor: pointer;
   z-index: 10000;
   transition: opacity 0.3s linear; /* Add this line */
