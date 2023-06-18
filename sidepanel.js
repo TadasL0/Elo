@@ -2,10 +2,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
   const sidePanel = document.getElementById('side-panel');
   const toggleButton = document.querySelector('.toggle-button');
   const panelEntries = document.querySelectorAll('#side-panel .entry-list');
-  const settingsToggle = document.getElementById('custom-settings-icon'); // <== NEW LINE
+  const settingsToggle = document.getElementById('custom-settings-icon');
 
   // Calculate the width of the side panel
-  const sidePanelWidth = sidePanel.offsetWidth;
+  const sidePanelWidth = sidePanel.getBoundingClientRect().width;
 
   // Calculate the visible portion as a percentage of the window width
   let visiblePortion;
@@ -22,37 +22,36 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   // Initially, make the entries invisible
   panelEntries.forEach(entry => {
-      entry.style.opacity = "0";
+    entry.style.opacity = "0";
   });
 
-// Adjust the left property when the button is clicked
-toggleButton.addEventListener('click', () => {
-  if (sidePanel.style.left !== "0px") {
-    sidePanel.style.left = "0px";
-    settingsToggle.style.opacity = '0';
-    settingsToggle.style.pointerEvents = 'none'; // disable pointer events when opacity is 0
+  // Adjust the left property when the button is clicked
+  toggleButton.addEventListener('click', () => {
+    if (sidePanel.style.left !== "0px") {
+      sidePanel.style.left = "0px";
+      settingsToggle.style.opacity = '0';
+      settingsToggle.style.pointerEvents = 'none';
 
-    // Make the entries visible after the panel has been opened
-    setTimeout(() => {
-      panelEntries.forEach(entry => {
-        entry.style.opacity = "1";
-      });
-    }, 200); // Delay in milliseconds, adjust as needed
+      // Make the entries visible after the panel has been opened
+      setTimeout(() => {
+        panelEntries.forEach(entry => {
+          entry.style.opacity = "1";
+        });
+      }, 200); 
 
-  } else {
-    sidePanel.style.left = `-${sidePanelWidth - visiblePortion}px`;
-    setTimeout(() => {
-      settingsToggle.style.opacity = '1';
-      settingsToggle.style.pointerEvents = 'auto'; // enable pointer events when opacity is 1
-    }, 200); // Delay in milliseconds, adjust as needed
+    } else {
+      sidePanel.style.left = `-${sidePanelWidth - visiblePortion}px`;
+      setTimeout(() => {
+        settingsToggle.style.opacity = '1';
+        settingsToggle.style.pointerEvents = 'auto';
+      }, 200);
 
-    // Delay the entries to disappear after the panel has closed
-    setTimeout(() => {
-      panelEntries.forEach(entry => {
-        entry.style.opacity = "0";
-      });
-    }, 200);  // Delay in milliseconds, adjust as needed
-  }
+      // Delay the entries to disappear after the panel has closed
+      setTimeout(() => {
+        panelEntries.forEach(entry => {
+          entry.style.opacity = "0";
+        });
+      }, 200);
+    }
+  });
 });
-});
-
