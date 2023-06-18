@@ -1,39 +1,60 @@
 let autosaveTimer; // Variable to store the timer ID
 
-const autosaveEntry = async () => {
-  // Clear any previous timer
+// Function to autosave an entry
+const autosaveEntry = () => {
   if (autosaveTimer) clearTimeout(autosaveTimer);
 
-  // Set a new timer to trigger autosave after a brief delay
-  autosaveTimer = setTimeout(async () => {
+  autosaveTimer = setTimeout(() => {
     const entry = document.getElementById("journal-entry").value;
-    const currentDate = new Date().toLocaleDateString(); // Get the current date
 
-    const data = {
-      title: `Diary Entry - ${currentDate}`, // Add the current date to the title
-      content: entry,
-    };
-
-    try {
-      const response = await fetch("https://app.eloskill.com/api/entries", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      console.log("Journal entry autosaved successfully");
-    } catch (error) {
-      console.error("An error occurred:", error);
+    if (entry.trim() !== "") {  // Check if entry is not empty
+      const data = buildEntryData(entry);
+      saveEntry(data);
     }
-    
-    // Save the text to localStorage 
-    localStorage.setItem("journalEntry", document.getElementById("journal-entry").value);
-  }, 1000); // Adjust the delay as needed (e.g., 1000ms = 1 second)
+
+    saveToLocalStore("journalEntry", entry);
+  }, 1000);
+};
+
+// Function to build the entry data
+const buildEntryData = (entry) => {
+  const currentDate = new Date().toLocaleDateString(); // Get the current date
+  const data = {
+    title: `Diary Entry - ${currentDate}`,
+    content: entry,
+  };
+
+  return data;
+};
+
+// Function to save an entry
+const saveEntry = async (data) => {
+  try {
+    const response = await fetch("https://app.eloskill.com/api/entries", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    console.log("Journal entry autosaved successfully");
+  } catch (error) {
+    console.error("An error occurred while saving the entry:", error);
+  }
+};
+
+// Function to save to local storage
+const saveToLocalStore = (key, value) => {
+  localStorage.setItem(key, value);
+};
+
+// Function to load from local storage
+const loadFromLocalStore = (key) => {
+  return localStorage.getItem(key);
 };
 
 // Ensure that the DOM is fully loaded before attaching the event listener
@@ -41,9 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const journalEntryElement = document.getElementById("journal-entry");
   journalEntryElement.addEventListener("input", autosaveEntry);
   
-  // If there is any text in localStorage
-  if(localStorage.getItem("journalEntry")) {
-    // Retrieve it and put it in the div
-    journalEntryElement.value = localStorage.getItem("journalEntry");
+  const savedEntry = loadFromLocalStore("journalEntry");
+  if (savedEntry) {
+    journalEntryElement.value = savedEntry;
   }
 });
