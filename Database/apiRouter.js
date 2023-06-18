@@ -14,7 +14,7 @@ module.exports = (pool) => {
 
     try {
       // Retrieve the journal entries from the PostgreSQL database
-      const result = await pool.query("SELECT * FROM entries");
+      const result = await pool.query("SELECT * FROM entries ORDER BY date DESC");
       console.log("Journal entries retrieved successfully");
       res.status(200).json({ message: "Journal entries retrieved successfully", data: result.rows });
     } catch (err) {
@@ -28,12 +28,18 @@ module.exports = (pool) => {
     console.log("Received a POST request to /api/entries");
 
     try {
-      const { title, content } = req.body;
+      const { title, content, date } = req.body;
+
+      // Validate the input
+      if (!title || !content || !date) {
+        res.status(400).json({ error: "Missing title, content, or date" });
+        return;
+      }
 
       // Save the journal entry to the PostgreSQL database
       await pool.query(
-        "INSERT INTO entries (title, content) VALUES ($1, $2)",
-        [title, content]
+        "INSERT INTO entries (title, content, date) VALUES ($1, $2, $3)",
+        [title, content, new Date(date)] // Parse date string to Date object
       );
       
       console.log("Journal entry saved successfully");

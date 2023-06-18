@@ -19,15 +19,18 @@ const autosaveEntry = () => {
   }, 1000);
 };
 
+// Function to build the entry data
 const buildEntryData = (entry) => {
-  const currentDate = new Date().toLocaleDateString();
+  const currentDate = new Date(); // Get the current date
   const data = {
-    title: `Diary Entry - ${currentDate}`,
+    title: `Diary Entry - ${currentDate.toLocaleDateString()}`,
     content: entry,
+    date: currentDate.toISOString(), // convert date to string in ISO format
   };
 
   return data;
 };
+
 
 const saveEntry = async (data) => {
   try {
@@ -79,3 +82,5 @@ document.addEventListener('DOMContentLoaded', () => {
     console.error("An error occurred while loading from Local Storage:", error);
   }
 });
+
+
