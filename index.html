@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Responsive viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Skill</title>
   <link rel="icon" type="image/png" href="assets/glimmer_v2.svg">
   <link rel="stylesheet" href="settings.css">
@@ -52,15 +52,15 @@
       <div class="toggle-container">
         <input type="checkbox" id="toggle-dark-mode" class="toggle-checkbox">
         <label for="toggle-dark-mode" class="toggle-label">
-            <i class="far fa-sun"></i> <!-- Sun icon -->
-            <i class="far fa-moon"></i> <!-- Moon icon -->
+            <i class="far fa-sun"></i>
+            <i class="far fa-moon"></i>
         </label>
       </div>  
       <div id="streak">
         <span id="streak-count">1</span>
         <i class="fas fa-fire"></i>
       </div> 
-      <textarea id="journal-entry" placeholder="" oninput="autosaveEntry()" onfocus="changeQuestion()"></textarea>
+      <textarea id="journal-entry" placeholder="" oninput="autosaveEntry()"></textarea>
       <div id="color-options">
         <div class="color-option highlight-red" onclick="applyHighlightColor('highlight-red')"></div>
         <div class="color-option highlight-green" onclick="applyHighlightColor('highlight-green')"></div>
@@ -71,12 +71,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.13.0/Sortable.min.js"></script>
   <script src="sidepanel.js"></script>
   <script src="savingfunctionality.js"></script>
-  <script src="settingsfunctionality.js"></script>
   <script src="streak.js"></script>
   <script src="createentry.js"></script>
   <script src="coloring_navbar.js"></script>
   <script src="loadingscreen.js"></script>
   <script src="darkmode.js"></script>
-  <script src="questionswap.js"></script>
+  <script src="questions.js"></script>
 </body>
 </html>
