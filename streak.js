@@ -28,3 +28,4 @@ function updateStreak() {
     updateStreak();
   };
   
+module.exports = { updateStreak };
