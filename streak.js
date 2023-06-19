@@ -5,29 +5,31 @@ library.add(faFire);
 dom.watch();
 
 function updateStreak() {
-const streakCountElement = document.getElementById('streak-count');
-let streakCount = parseInt(streakCountElement.textContent);
+  const streakCountElement = document.getElementById('streak-count');
 
-const lastEntryDate = localStorage.getItem('lastEntryDate');
-const currentDate = new Date().toLocaleDateString();
+  // Get today's date, but only up to the day, not including time
+  let today = new Date().toISOString().slice(0, 10);
 
-// Check if the streak is continuing from the previous day
-if (lastEntryDate !== currentDate) {
-// Increment the streak count
-streakCount++;
-localStorage.setItem('lastEntryDate', currentDate);
+  let lastVisit = localStorage.getItem('lastVisit');
+  let streakCount = localStorage.getItem('streakCount');
+
+  if (lastVisit === null) {
+    // If no record of last visit, this is the first visit
+    streakCount = 1;
+  } else if (lastVisit !== today) {
+    // If last visit is not today, increment the streak
+    streakCount = Number(streakCount) + 1;
+  }
+
+  // Update last visit and streak count in local storage
+  localStorage.setItem('lastVisit', today);
+  localStorage.setItem('streakCount', streakCount);
+
+  // Update streak count on the page
+  streakCountElement.textContent = streakCount;
 }
 
-streakCountElement.textContent = streakCount;
-}
-
-function completeJournalEntry() {
-// Perform the journal entry tasks...
-
-// Call the updateStreak function
-updateStreak();
-}
-
-// Add an event listener to the "Save Entry" button
-const saveEntryButton = document.getElementById('save-entry-button');
-saveEntryButton.addEventListener('click', completeJournalEntry);
+window.onload = function() {
+  // Update the streak as soon as the page loads
+  updateStreak();
+};
