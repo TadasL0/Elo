@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 });
 
 // ** Serve static files from the React app **
-app.use(express.static(path.join(__dirname, '../Skill')));
+app.use(express.static(path.join(__dirname, '..')));
 
 // DB config
 const pool = new Pool({
@@ -82,7 +82,11 @@ app.use((err, req, res, next) => {
 
 // Catch all other routes and return the index.html file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../Skill', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'index.html'), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
 });
 
 // Start the server
