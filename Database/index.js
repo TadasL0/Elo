@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 });
 
 // ** Serve static files from the React app **
-app.use(express.static(path.join(__dirname, 'Skill')));
+app.use(express.static(path.join(__dirname, '../Skill')));
 
 // DB config
 const pool = new Pool({
@@ -78,6 +78,11 @@ app.use("/api", cors(), apiRouter);
 app.use((err, req, res, next) => {
   logger.error(err.stack);
   res.status(500).send('Something broke!');
+});
+
+// Catch all other routes and return the index.html file
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Skill', 'index.html'));
 });
 
 // Start the server
