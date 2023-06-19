@@ -2,4 +2,4 @@
 .env
 /db.dump
 CNAME
-links
+links.env
