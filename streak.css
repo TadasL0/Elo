@@ -1,0 +1,37 @@
+#streak {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+  
+#streak-count {
+  font-size: 20px;
+  font-weight: bold;
+  color: #4a72f5;
+  margin-right: 10px;
+}
+  
+.fa-fire {
+  color: #4a72f5;
+  font-size: 24px;
+}
+
+@media only screen and (max-width: 600px) {
+  #streak-count {
+    font-size: 16px;
+  }
+  
+  .fa-fire {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 992px) {
+  #streak-count {
+    font-size: 18px;
+  }
+  
+  .fa-fire {
+    font-size: 22px;
+  }
+}

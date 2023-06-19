@@ -1,0 +1,51 @@
+@media only screen and (max-width: 600px) {
+  body,
+  html {
+    padding: 10px;
+  }
+
+  .content {
+    padding: 10px;
+  }
+
+  #journal-entry {
+    font-size: 18px;
+  }
+
+  .toggle-container {
+    right: 5px;
+    top: 5px;
+  }
+
+  .new-entry-button,
+  .toggle-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .new-entry-button i,
+  .toggle-button i {
+    font-size: 24px;
+  }
+
+  #custom-settings-icon {
+    font-size: 2em;
+  }
+
+  #custom-settings-panel {
+    top: 50px;
+    height: 75vh;
+  }
+
+  .entry-item {
+    font-size: 18px;
+  }
+
+  .entry-title {
+    font-size: 22px;
+  }
+
+  .entry-content {
+    font-size: 18px;
+  }
+}

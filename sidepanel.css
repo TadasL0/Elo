@@ -1,0 +1,313 @@
+/* ==================== Root and Dark Mode Variables ==================== */
+
+:root {
+  --background-color: #1F1F1E;
+  --text-color: #f5f5f5;
+  --content-background-color: #f5f5f5;
+  --entry-color: #252525;
+  --placeholder-color: #000000;
+  --panel-background-color: #424242;
+  --entry-text-color: #000000; /* Dark text for light mode */
+  --entry-background-color: #ffffff; /* Light background for light mode */
+}
+
+body.dark-mode {
+  --background-color: #000000;
+  --text-color: #ffffff;
+  --content-background-color: #353535;
+  --entry-color: #ffffff;
+  --placeholder-color: #cccccc;
+  --panel-background-color: #212121;
+  --entry-text-color: #ffffff; /* Light text for dark mode */
+  --entry-background-color: #353535; /* Dark background for dark mode */
+}
+
+/* ==================== Body and Container Styles ==================== */
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* ==================== Content and Journal Entry Styles ==================== */
+
+.content {
+  background-color: var(--content-background-color);
+  padding: 20px;
+  box-sizing: border-box;
+  border: 2px solid var(--content-border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+#journal-entry {
+  min-height: 200px;
+  background-color: var(--entry-background-color);
+  color: var(--entry-text-color);
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;  /* Required for z-index to work properly */
+  z-index: 1000;  /* Adjusted z-index */
+}
+
+/* ==================== Dark/Light Toggle Styles ==================== */
+
+.toggle-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.toggle-checkbox {
+  display: none;
+}
+
+.toggle-label {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.toggle-switch {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.toggle-switch:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-switch {
+  background-color: #2196F3;
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-switch:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.side-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100%;
+  background-color: var(--panel-background-color);
+  padding: 20px;
+  box-sizing: border-box;
+  border: 4px solid var(--content-border-color);
+  transition: left 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  z-index: 2000;  /* Adjusted z-index */
+  overflow-y: auto;
+}
+
+/* This will hide the default scrollbar */
+.side-panel::-webkit-scrollbar {
+  width: 15px; /* Width of the vertical scrollbar */
+}
+
+/* Handle */
+.side-panel::-webkit-scrollbar-thumb {
+  background: #666666; 
+  border-radius: 10px; /* this will make it similar to the buttons */
+}
+
+/* Handle on hover */
+.side-panel::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Track */
+.side-panel::-webkit-scrollbar-track {
+  background: #b1b1b1;
+  border-radius: 10px; 
+}
+
+
+.hide-panel {
+  left: -250px;
+}
+
+.show-panel {
+  left: 0;
+}
+
+.show-panel .entry-item {
+  font-family: "Inter", sans-serif;
+}
+
+.panel-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #250d1d;
+}
+
+.entry-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 40px 0 0;
+}
+
+.entry-item {
+  cursor: pointer;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 3px;
+  background-color: var(--entry-background-color);
+  color: var(--entry-text-color);
+  transition: background-color 0.3s ease;
+  flex-grow: 1;
+  visibility: visible;
+}
+
+.entry-item:hover {
+  background-color: #bcbcbc;
+}
+
+.entry-item.selected {
+  background-color: #c0c0c0;
+}
+
+.entry-title {
+  cursor: pointer;
+  font-weight: bold;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #320f30;
+}
+
+.entry-title.editable {
+  outline: none;
+  border: none;
+  background: none;
+}
+
+.entry-content {
+  font-size: 14px;
+  color: #270505;
+}
+
+.toggle-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  background-color: #ffffff;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.3s;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-button {
+  /* Add other properties above this line */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);  /* Adjust this value as needed */
+}
+
+.toggle-button:before,
+.toggle-button:after,
+.toggle-button > div {
+  content: "";
+  display: block;
+  height: 16px;
+  width: 2px;
+  background-color: #000000;
+}
+
+.toggle-button:before {
+  margin-right: 5px;
+}
+
+.toggle-button:after {
+  margin-left: 5px;
+}
+
+.toggle-button:hover {
+  background-color: #dcdcdc;
+  transform: scale(1.2);
+}
+
+
+.active {
+  background-color: #ff0000;
+}
+
+.new-entry-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 34px;
+  height: 34px;
+  background-color: #ffffff;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.3s;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-entry-button i {
+  color: #000000;
+  font-size: 16px;
+}
+
+.new-entry-button:hover {
+  background-color: #dcdcdc;
+  transform: scale(1.2);
+}
+
+.new-entry-button:hover {
+  background-color: #dcdcdc;
+  transform: scale(1.2);
+}
+
+#journal-entry:empty:before {
+  content: attr(placeholder);
+  color: var(--placeholder-color);
+}
+
+#side-panel .entry-list {
+  /* Initially, make the entries visible */
+  opacity: 1;
+
+  /* Add a transition to smoothly animate the opacity */
+  transition: opacity 0.5s;
+}
+
+
