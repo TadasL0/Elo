@@ -3,20 +3,37 @@ const express = require("express");
 const { Pool } = require("pg");
 const cors = require("cors");
 const createApiRouter = require("./apiRouter");
+const rateLimit = require("express-rate-limit");
+const winston = require('winston');
 require('dotenv').config();
 
 const app = express();
 
+// create a logger
+const logger = winston.createLogger({
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'combined.log' })
+  ]
+});
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
+
 // Middleware
 app.use(cors({
-  origin: 'https://eloskill.com', // or the specific origin you want to give access to
+  origin: 'https://eloskill.com', 
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,  // This allows the session cookie to be sent back and forth
-  exposedHeaders: ['Access-Control-Allow-Origin'], // Add this line
+  credentials: true, 
+  exposedHeaders: ['Access-Control-Allow-Origin'], 
   optionsSuccessStatus: 200
 }));
 
+app.use(limiter); // apply rate limiter
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:5500');
@@ -24,7 +41,7 @@ app.use((req, res, next) => {
   next();
 });
 
-
+// DB config
 const pool = new Pool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
@@ -40,33 +57,49 @@ const pool = new Pool({
 async function connectToDatabase() {
   try {
     await pool.connect();
-    console.log("Connected to PostgreSQL");
+    logger.info("Connected to PostgreSQL");
   } catch (error) {
-    console.error("Error connecting to PostgreSQL:", error);
-    setTimeout(connectToDatabase, 5000); // Try again after 5 seconds
+    logger.error("Error connecting to PostgreSQL:", error);
+    setTimeout(connectToDatabase, 5000); 
   }
 }
 
 connectToDatabase();
 
 // Register the API routes
-const apiRouter = createApiRouter(pool); // Pass the pool to create the router
-app.use("/api", cors(), apiRouter); // Apply CORS specifically on your API routes
+const apiRouter = createApiRouter(pool); 
+app.use("/api", cors(), apiRouter); 
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  logger.error(err.stack);
   res.status(500).send('Something broke!');
 });
 
 // Start the server
 const port = process.env.PORT || 3001;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+const server = app.listen(port, () => {
+  logger.info(`Server is running on port ${port}`);
 });
 
 // Catch unhandled Promise rejections
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
-  process.exit(1);
+  logger.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
+
+// handle signals - in Docker container SIGINT will not be emitted on process exit
+['SIGINT', 'SIGTERM', 'SIGQUIT'].forEach(signal =>
+  process.on(signal, () =>
+    server.close(err => {
+      if (err) {
+        logger.error(err);
+        process.exit(1);
+      }
+
+      pool.end(() => {
+        logger.info('DB connection closed.');
+        process.exit(0);
+      });
+    })
+  )
+);
