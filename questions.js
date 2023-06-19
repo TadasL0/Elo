@@ -26,14 +26,14 @@ function storeOrder() {
 
 const loadOrder = () => {
   console.log('loadOrder called');
-  const fixedOrder = localStorage.getItem('fixed-order');
-  const editableOrder = localStorage.getItem('editable-order');
+  const fixedOrder = localStorage.getItem('fixedOrder');
+  const editableOrder = localStorage.getItem('editableOrder');
 
   console.log('fixedOrder:', fixedOrder);
   console.log('editableOrder:', editableOrder);
   
   if (fixedOrder) {
-    fixedOrder.split(',').forEach(id => {
+    JSON.parse(fixedOrder).forEach(id => {
       const item = document.getElementById(id);
       if(item) {
         fixedList.appendChild(item);
@@ -43,7 +43,7 @@ const loadOrder = () => {
   }
 
   if (editableOrder) {
-    editableOrder.split(',').forEach(id => {
+    JSON.parse(editableOrder).forEach(id => {
       const item = document.getElementById(id);
       if(item) {
         editableList.appendChild(item);
@@ -91,9 +91,8 @@ document.addEventListener("DOMContentLoaded", function() {
 window.onload = function() {
   console.log('window.onload event');
   try {
-    loadOrder();
-    changeQuestion();
     document.getElementById('journal-entry').focus();
+    changeQuestion();
   } catch (error) {
     console.error('Error in window.onload event handler:', error);
   }
