@@ -1,4 +1,4 @@
-import { updateStreak } from '../streak.js';
+const { updateStreak } = require('../streak.js');
 
 describe('updateStreak', () => {
   it('increments the streak count by 1 if the last visit was not today', () => {
