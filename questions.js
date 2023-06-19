@@ -24,37 +24,34 @@ function storeOrder() {
   localStorage.setItem('editableOrder', JSON.stringify(editableOrder));
 }
 
-function loadOrder() {
+const loadOrder = () => {
   console.log('loadOrder called');
-  try {
-    var fixedOrder = localStorage.getItem('fixedOrder') ? JSON.parse(localStorage.getItem('fixedOrder')) : [];
-    var editableOrder = localStorage.getItem('editableOrder') ? JSON.parse(localStorage.getItem('editableOrder')) : [];
+  const fixedOrder = localStorage.getItem('fixed-order');
+  const editableOrder = localStorage.getItem('editable-order');
 
-    while (fixedList.firstChild) {
-      fixedList.firstChild.remove();
-    }
-
-    fixedOrder.forEach(function (question) {
-      var li = document.createElement('li');
-      li.textContent = question;
-      li.className = 'sortable-item';
-      fixedList.appendChild(li);
+  console.log('fixedOrder:', fixedOrder);
+  console.log('editableOrder:', editableOrder);
+  
+  if (fixedOrder) {
+    fixedOrder.split(',').forEach(id => {
+      const item = document.getElementById(id);
+      if(item) {
+        fixedList.appendChild(item);
+        console.log('Added item to fixedList:', item);
+      }
     });
-
-    while (editableList.firstChild) {
-      editableList.firstChild.remove();
-    }
-
-    editableOrder.forEach(function (question) {
-      var li = document.createElement('li');
-      li.className = 'sortable-item';
-      li.innerHTML = `<span class="drag-handle"></span> <span contenteditable="true">${question}</span>`;
-      editableList.appendChild(li);
-    });
-  } catch (error) {
-    console.error('Error in loadOrder:', error);
   }
-}
+
+  if (editableOrder) {
+    editableOrder.split(',').forEach(id => {
+      const item = document.getElementById(id);
+      if(item) {
+        editableList.appendChild(item);
+        console.log('Added item to editableList:', item);
+      }
+    });
+  }
+};
 
 document.addEventListener("DOMContentLoaded", function() {
   console.log('DOMContentLoaded event');
