@@ -1,5 +1,6 @@
 // server.js (or your server-side file)
 const express = require("express");
+const path = require('path');
 const { Pool } = require("pg");
 const cors = require("cors");
 const createApiRouter = require("./apiRouter");
@@ -40,6 +41,9 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
+
+// ** Serve static files from the React app **
+app.use(express.static(path.join(__dirname, 'Skill')));
 
 // DB config
 const pool = new Pool({
