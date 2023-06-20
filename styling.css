@@ -11,7 +11,6 @@
 }
 
 body, html {
-  height: 100%;
   margin: 0;
   padding: 0;
   background-color: var(--background-color);
@@ -99,6 +98,24 @@ body::before {
 .fa-fire {
   color: #4a72f5;
   font-size: 24px;
+}
+
+#side-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+  width: 250px;
+  height: 100vh;
+  background: #808080;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease-in-out;
+  padding: 10px;
+  z-index: 9998;
+}
+
+#side-panel.show-panel {
+  transform: translateX(0);
 }
 
 @media only screen and (min-width: 601px) {
