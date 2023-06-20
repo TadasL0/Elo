@@ -28,6 +28,12 @@ class Journal {
     this.newEntryButton = document.querySelector('.new-entry-button');
     this.journalEntry = document.getElementById('journal-entry');
 
+    // Initialize Sortable on the entry-list
+    new Sortable(this.entryList, {
+      animation: 150,
+      onUpdate: () => this.updateEntryOrder()
+    });
+
     // Event listeners
     this.newEntryButton.addEventListener('click', () => this.createNewEntry());
     this.toggleButton.addEventListener('click', () => this.toggleSidePanel());
@@ -46,6 +52,16 @@ class Journal {
       entryItem.addEventListener('click', () => this.selectEntry(index));
       this.entryList.appendChild(entryItem);
     });
+  }
+
+  // Function to update the order of entries after sorting
+  updateEntryOrder() {
+    this.entries = Array.from(this.entryList.children).map((entryItem) => {
+      const title = entryItem.textContent;
+      const content = this.entries.find((entry) => entry.title === title).content;
+      return new Entry(title, content);
+    });
+    this.saveEntriesToLocalStorage();
   }
 
   // Function to rename an entry
@@ -96,7 +112,7 @@ class Journal {
     for (let item of entryItems) {
       item.classList.toggle('entry-visible');
     }
-}
+  }
 }
 
 // Start the journal app
