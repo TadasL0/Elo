@@ -15,17 +15,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Questrial&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div id="loading-screen">
-    <div id="left-pane" class="loading-pane"></div>
-    <div id="right-pane" class="loading-pane"></div>
+  <div id="side-panel-button">
+    <i class="fas fa-book"></i>
   </div>
   <div id="side-panel" class="side-panel hide-panel">
-    <div class="new-entry-button" onclick="createNewEntry()"><i class="fas fa-plus"></i></div>
-    <ul id="entry-list" class="entry-list"></ul>
+    <div id="side-panel-content-wrapper">
+      <div id="side-panel-content">
+        <div class="new-entry-button" onclick="createNewEntry()"><i class="fas fa-plus"></i></div>
+        <ul id="sortable-editable-list" class="sortable-list">
+          <li class="sortable-item" id="item-1">
+            <span class="drag-handle"><i class="fas fa-bars"></i></span>
+            <span class="editable-text" contenteditable="true">Click to change this prompt.</span>
+          </li>
+          <!-- Other list items -->
+        </ul>
+      </div>
+      <div id="delete-area">
+        <i class="fas fa-trash"></i>
+        <p>Drag here to delete</p>
+      </div>
+    </div>
+  </div>
+  <!-- ... -->
     <div class="toggle-button" id="toggle-button">
       <div></div>
     </div>     
   </div>
+
   <div id="custom-settings-container">
     <div id="custom-settings-icon" onclick="toggleCustomSettingsPanel()">
       <i class="fas fa-cog"></i>
@@ -40,14 +56,15 @@
         <li class="sortable-item">What skill would serve you best right now?</li>
       </ul>
       <h3>Create your own prompt!</h3>
-    <ul id="sortable-editable-list" class="sortable-list">
-      <li class="sortable-item"><span class="drag-handle"></span> <span contenteditable="true">Click to change this prompt.</span></li>
-      <li class="sortable-item"><span class="drag-handle"></span> <span contenteditable="true">Click to change this prompt.</span></li>
-      <li class="sortable-item"><span class="drag-handle"></span> <span contenteditable="true">Click to change this prompt.</span></li>
-    </ul>
+      <ul id="sortable-editable-list" class="sortable-list">
+        <li class="sortable-item"><span class="drag-handle"></span> <span contenteditable="true">Click to change this prompt.</span></li>
+        <li class="sortable-item"><span class="drag-handle"></span> <span contenteditable="true">Click to change this prompt.</span></li>
+        <li class="sortable-item"><span class="drag-handle"></span> <span contenteditable="true">Click to change this prompt.</span></li>
+      </ul>
     </div>    
   </div>
-    <div class="container">
+
+  <div class="container">
     <div class="content">
       <div class="toggle-container">
         <input type="checkbox" id="toggle-dark-mode" class="toggle-checkbox">
@@ -68,7 +85,7 @@
     </div>
   </div>  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.13.0/Sortable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
   <script src="sidepanel.js"></script>
   <script src="saving.js"></script>
   <script src="streak.js"></script>

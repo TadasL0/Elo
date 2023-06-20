@@ -1,57 +1,125 @@
+console.log('Running sidepanel script');
+
 window.addEventListener("DOMContentLoaded", (event) => {
   const sidePanel = document.getElementById('side-panel');
-  const toggleButton = document.querySelector('.toggle-button');
-  const panelEntries = document.querySelectorAll('#side-panel .entry-list');
-  const settingsToggle = document.getElementById('custom-settings-icon');
+  const sidePanelButton = document.getElementById('side-panel-button');
+  const newEntryButton = document.querySelector('.new-entry-button');
 
-  // Calculate the width of the side panel
-  const sidePanelWidth = sidePanel.getBoundingClientRect().width;
-
-  // Calculate the visible portion as a percentage of the window width
-  let visiblePortion;
-  if (window.matchMedia("(max-width: 600px)").matches) {
-    // If the viewport is 600px or less, make the side panel poke out more
-    visiblePortion = window.innerWidth * 0.15; // Adjust this value as needed
-  } else {
-    // If the viewport is more than 600px, use the original value
-    visiblePortion = window.innerWidth * 0.06;
-  }
-
-  // Set initial style for the side panel as closed
-  sidePanel.style.left = `-${sidePanelWidth - visiblePortion}px`;
-
-  // Initially, make the entries invisible
-  panelEntries.forEach(entry => {
-    entry.style.opacity = "0";
-  });
+  loadEntriesFromLocalStorage();
 
   // Adjust the left property when the button is clicked
-  toggleButton.addEventListener('click', () => {
-    if (sidePanel.style.left !== "0px") {
-      sidePanel.style.left = "0px";
-      settingsToggle.style.opacity = '0';
-      settingsToggle.style.pointerEvents = 'none';
-
-      // Make the entries visible after the panel has been opened
-      setTimeout(() => {
-        panelEntries.forEach(entry => {
-          entry.style.opacity = "1";
-        });
-      }, 200); 
-
-    } else {
-      sidePanel.style.left = `-${sidePanelWidth - visiblePortion}px`;
-      setTimeout(() => {
-        settingsToggle.style.opacity = '1';
-        settingsToggle.style.pointerEvents = 'auto';
-      }, 200);
-
-      // Delay the entries to disappear after the panel has closed
+  sidePanelButton.addEventListener('click', () => {
+    const panelEntries = document.querySelectorAll('#entry-list li');
+    if (sidePanel.style.left === "0px") {
+      sidePanel.style.left = "-250px";
       setTimeout(() => {
         panelEntries.forEach(entry => {
           entry.style.opacity = "0";
         });
+        newEntryButton.style.opacity = "0";
+      }, 200); 
+    } else {
+      sidePanel.style.left = "0px";
+      setTimeout(() => {
+        panelEntries.forEach(entry => {
+          entry.style.opacity = "1";
+        });
+        newEntryButton.style.opacity = "1";
       }, 200);
     }
   });
+});
+
+// Function to create a new entry when the plus button is clicked
+function createNewEntry() {
+  const entryList = document.getElementById('sortable-editable-list');
+  if (!entryList) {
+      console.error('Could not find sortable-editable-list element');
+      return;
+  }
+
+  const newEntry = document.createElement('li');
+  newEntry.classList.add('sortable-item');
+  newEntry.setAttribute('draggable', 'true'); // This is new
+  newEntry.addEventListener('dragstart', (event) => { // This is new
+    event.dataTransfer.setData('text/plain', newEntry.id);
+  });
+
+  const newEntryText = document.createElement('span');
+  newEntryText.classList.add('editable-text');
+  newEntryText.setAttribute('contenteditable', 'true');
+  newEntryText.innerText = 'New entry';
+
+  newEntry.appendChild(newEntryText);
+  entryList.appendChild(newEntry);
+
+  // Add event listener for double click to start editing
+  newEntryText.addEventListener('dblclick', (event) => {
+    event.target.setAttribute('contenteditable', 'true');
+  });
+
+  // Add event listener for enter key to stop editing
+  newEntryText.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      event.target.setAttribute('contenteditable', 'false');
+      // Save entries to local storage whenever an entry is finished being edited
+      saveEntriesToLocalStorage();
+    }
+  });
+  
+  // Save entries to local storage whenever a new entry is created
+  saveEntriesToLocalStorage();
+}
+
+function saveEntriesToLocalStorage() {
+  const entryList = document.getElementById('sortable-editable-list');
+  const entries = Array.from(entryList.querySelectorAll('li'));
+  const entriesData = entries.map(entry => {
+    return { id: entry.id, innerText: entry.innerText };
+  });
+  localStorage.setItem('entries', JSON.stringify(entriesData));
+}
+
+function loadEntriesFromLocalStorage() {
+  const entriesData = JSON.parse(localStorage.getItem('entries'));
+  if (entriesData) {
+    entriesData.forEach(entryData => {
+      const newEntry = document.createElement('li');
+      newEntry.classList.add('sortable-item');
+      newEntry.id = entryData.id;
+      newEntry.setAttribute('draggable', 'true'); // This is new
+      newEntry.addEventListener('dragstart', (event) => { // This is new
+        event.dataTransfer.setData('text/plain', newEntry.id);
+      });
+
+      const newEntryText = document.createElement('span');
+      newEntryText.classList.add('editable-text');
+      newEntryText.setAttribute('contenteditable', 'true');
+      newEntryText.innerText = entryData.innerText;
+
+      newEntry.appendChild(newEntryText);
+      const entryList = document.getElementById('sortable-editable-list');
+      entryList.appendChild(newEntry);
+    });
+  }
+}
+
+// DOOM DELETION AREA!
+const deleteArea = document.getElementById('delete-area');
+
+deleteArea.addEventListener('drop', (event) => {
+  event.preventDefault();
+  const id = event.dataTransfer.getData('text/plain');
+  const elementToRemove = document.getElementById(id);
+  if (elementToRemove) {
+    elementToRemove.remove();
+    // Save entries to local storage whenever an entry is deleted
+    saveEntriesToLocalStorage();
+  }
+});
+
+deleteArea.addEventListener('dragover', (event) => {
+  event.preventDefault();
+  event.dataTransfer.dropEffect = 'move';
 });
