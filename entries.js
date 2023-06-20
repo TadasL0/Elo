@@ -99,6 +99,17 @@ function loadEntriesFromLocalStorage() {
   return savedEntries;
 }
 
+// Initiate sortable
+const sortableEditableLists = Array.from(document.querySelectorAll('.sortable-editable-list'));
+
+sortableEditableLists.forEach((sortableEditableList) => {
+  Sortable.create(sortableEditableList, {
+    animation: 150,
+    onEnd: saveEntriesToLocalStorage,
+  });
+});
+
+
 // Function to save entries to local storage
 function saveEntriesToLocalStorage() {
   const entryListItems = document.querySelectorAll('#sortable-editable-list .sortable-item');
