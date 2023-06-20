@@ -59,6 +59,11 @@ body::-webkit-scrollbar {
   margin-top: 50px;
 }
 
+#sortable-editable-list {
+  height: 100%; /* adjust this as needed */
+  overflow-y: auto;
+}
+
 #side-panel-button {
   position: fixed;
   left: 10px;
