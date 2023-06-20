@@ -110,7 +110,7 @@ body::before {
   transform: translateX(-100%);
   width: 250px;
   height: 100vh;
-  background: #808080;
+  background: #8f8f8f;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   transition: transform 0.3s ease-in-out;
   padding: 10px;
@@ -199,8 +199,8 @@ body::before {
 }
 
 body.dark-mode {
-  background-color: #252525;
-  color: #f5f5f5;
+  background-color: #ececec;
+  color: #777777;
 }
 
 body.dark-mode #journal-entry {
