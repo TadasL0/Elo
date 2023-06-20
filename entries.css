@@ -10,7 +10,8 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-#side-panel {
+#entries-panel {
+  display: none;
   position: relative;
   top: 0;
   left: -250px;
@@ -24,11 +25,11 @@ body::-webkit-scrollbar {
   z-index: 9998;
 }
 
-#side-panel.show-panel {
+#entries-panel.show-panel {
   left: 0;
 }
 
-#side-panel-content-wrapper {
+#entries-panel-content-wrapper {
   position: relative;
   height: 100%;
   overflow: auto;
@@ -42,12 +43,12 @@ body::-webkit-scrollbar {
   color: #000000;
 }
 
-.entry-list {
+.entries-list {
   list-style-type: none;
   padding: 0;
 }
 
-.entry-list li {
+.entries-list li {
   padding: 10px;
   margin-bottom: 5px;
   background-color: #FFFFFF;
@@ -55,16 +56,16 @@ body::-webkit-scrollbar {
   color: #000000;
 }
 
-#entry-list .entry-item:first-child {
+#entries-list .entry-item:first-child {
   margin-top: 50px;
 }
 
-#sortable-editable-list {
+#entries-list {
   height: 100%; 
-  padding-top: 50px; /* added padding-top to push the list down */
+  padding-top: 50px;
 }
 
-#side-panel-button {
+#entries-panel-button {
   position: fixed;
   left: 10px;
   top: 10px;
@@ -77,12 +78,12 @@ body::-webkit-scrollbar {
 .new-entry-button {
   position: absolute;
   right: 5px;
-  top: 1px; /* adjust as needed */
-  font-size: 22px; /* make the button a bit bigger */
-  color: white; /* adjust as needed */
+  top: 1px;
+  font-size: 22px;
+  color: white;
 }
 
-#delete-area {
+#entries-delete-area {
   position: absolute;
   bottom: 0;
   width: 100%;

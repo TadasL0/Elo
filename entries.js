@@ -1,6 +1,5 @@
-console.log('Running sidepanel script');
+console.log('Running entries script');
 
-// The entry model
 class Entry {
   constructor(id = `entry-${Date.now()}`, text = 'Click to change this prompt.') {
     this.id = id;
@@ -9,14 +8,13 @@ class Entry {
 }
 
 window.addEventListener("DOMContentLoaded", (event) => {
-  const sidePanel = document.getElementById('side-panel');
-  const sidePanelButton = document.getElementById('side-panel-button');
+  const entriesPanel = document.getElementById('entries-panel');
+  const entriesPanelButton = document.getElementById('entries-panel-button');
   const newEntryButton = document.querySelector('.new-entry-button');
-  const deleteArea = document.getElementById('delete-area');
+  const entriesDeleteArea = document.getElementById('entries-delete-area');
   
   let entries = loadEntriesFromLocalStorage();
 
-  // Event listener for new entry button
   newEntryButton.addEventListener('click', () => {
     const newEntry = new Entry();
     entries.push(newEntry);
@@ -24,32 +22,30 @@ window.addEventListener("DOMContentLoaded", (event) => {
     saveEntriesToLocalStorage();
   });
 
-  // Adjust the left property when the button is clicked
-  sidePanelButton.addEventListener('click', () => {
-    const panelEntries = document.querySelectorAll('#sortable-editable-list .sortable-item');
-    if (sidePanel.style.left === "0px") {
-      sidePanel.style.left = "-250px";
+  entriesPanelButton.addEventListener('click', () => {
+    const panelEntries = document.querySelectorAll('#entries-list .entry-item');
+    if (entriesPanel.style.left === "0px") {
+      entriesPanel.style.left = "-250px";
       setTimeout(() => {
         panelEntries.forEach(entry => {
           entry.style.opacity = "0";
         });
         newEntryButton.style.opacity = "0";
-        deleteArea.style.opacity = "0";
+        entriesDeleteArea.style.opacity = "0";
       }, 200); 
     } else {
-      sidePanel.style.left = "0px";
+      entriesPanel.style.left = "0px";
       setTimeout(() => {
         panelEntries.forEach(entry => {
           entry.style.opacity = "1";
         });
         newEntryButton.style.opacity = "1";
-        deleteArea.style.opacity = "1";
+        entriesDeleteArea.style.opacity = "1";
       }, 200);
     }
   });
 
-  // DOOM DELETION AREA!
-  deleteArea.addEventListener('drop', (event) => {
+  entriesDeleteArea.addEventListener('drop', (event) => {
     event.preventDefault();
     const id = event.dataTransfer.getData('text/plain');
     const elementToRemove = document.getElementById(id);
@@ -60,38 +56,34 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
   });
 
-  deleteArea.addEventListener('dragover', (event) => {
+  entriesDeleteArea.addEventListener('dragover', (event) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = 'move';
   });
 
-  // Initiate sortable
-  Sortable.create(sortableEditableList, {
+  Sortable.create(document.getElementById('entries-list'), {
     animation: 150,
     onEnd: saveEntriesToLocalStorage
   });
 });
 
-// Function to create a new entry when the plus button is clicked
 function createNewEntry(entry) {
-  const entryList = document.getElementById('sortable-editable-list');
+  const entryList = document.getElementById('entries-list');
   const newEntryHTML = `
-    <li id="${entry.id}" draggable="true" class="sortable-item" ondragstart="drag(event)">
+    <li id="${entry.id}" draggable="true" class="entry-item" ondragstart="drag(event)">
       <span class="drag-handle"></span> <span contenteditable="true">${entry.text}</span>
     </li>
   `;
   entryList.insertAdjacentHTML('beforeend', newEntryHTML);
 }
 
-// Function for the drag event
 function drag(event) {
   event.dataTransfer.setData('text/plain', event.target.id);
 }
 
-// Function to load entries from local storage
 function loadEntriesFromLocalStorage() {
   const savedEntries = JSON.parse(localStorage.getItem('entries') || "[]");
-  const entryList = document.getElementById('sortable-editable-list');
+  const entryList = document.getElementById('entries-list');
   entryList.innerHTML = '';
   savedEntries.forEach(entry => {
     createNewEntry(entry);
@@ -99,20 +91,8 @@ function loadEntriesFromLocalStorage() {
   return savedEntries;
 }
 
-// Initiate sortable
-const sortableEditableLists = Array.from(document.querySelectorAll('.sortable-editable-list'));
-
-sortableEditableLists.forEach((sortableEditableList) => {
-  Sortable.create(sortableEditableList, {
-    animation: 150,
-    onEnd: saveEntriesToLocalStorage,
-  });
-});
-
-
-// Function to save entries to local storage
 function saveEntriesToLocalStorage() {
-  const entryListItems = document.querySelectorAll('#sortable-editable-list .sortable-item');
+  const entryListItems = document.querySelectorAll('#entries-list .entry-item');
   const entriesToSave = Array.from(entryListItems).map(entryListItem => {
     return new Entry(entryListItem.id, entryListItem.querySelector('span[contenteditable]').innerText);
   });

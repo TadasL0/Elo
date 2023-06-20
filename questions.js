@@ -1,9 +1,9 @@
 console.log('Running script');
 
-function toggleCustomSettingsPanel() {
-  console.log('toggleCustomSettingsPanel called');
-  var settingsPanel = document.getElementById('custom-settings-panel');
-  var settingsIcon = document.getElementById('custom-settings-icon');
+function toggleQuestionsSettingsPanel() {
+  console.log('toggleQuestionsSettingsPanel called');
+  var settingsPanel = document.getElementById('questions-settings-panel');
+  var settingsIcon = document.getElementById('questions-settings-icon');
 
   if (settingsPanel.style.right === '0px') {
     settingsPanel.style.right = '-260px';
