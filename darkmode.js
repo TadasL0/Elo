@@ -8,7 +8,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
   body.classList.toggle('dark-mode', darkModeStoredState);
 
   toggleDarkMode.addEventListener('change', (event) => {
-      body.classList.toggle('dark-mode', event.target.checked);
-      localStorage.setItem('darkModeState', event.target.checked);
-  });
+    // force a reflow (repaint) 
+    void body.offsetHeight;
+  
+    body.classList.toggle('dark-mode', event.target.checked);
+    localStorage.setItem('darkModeState', event.target.checked);
+  });  
 });

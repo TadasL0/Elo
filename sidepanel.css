@@ -11,12 +11,12 @@ body::-webkit-scrollbar {
 }
 
 #side-panel {
-  position: relative;
+  position: absolute;
   top: 0;
-  left: -250px;
+  left: -100%; /* this will ensure the panel is fully offscreen, regardless of its width */
   width: 250px;
   height: 100vh;
-  background: var(--settings-background-color);
+  background: #808080;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   transition: left 0.3s ease-in-out;
   overflow: auto; 
