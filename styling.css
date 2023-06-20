@@ -1,13 +1,25 @@
 :root {
-  --background-color: #1F1F1E;
-  --content-background-color: #e7e7e7;
-  --content-border-color: #000000;
+  --background-color: #f2f2f2; /* light gray for the outskirts */
+  --content-background-color: #ffffff; /* white for the textarea background */
+  --content-border-color: #cccccc;
   --entry-color: #252525;
-  --placeholder-color: #ececec;
+  --placeholder-color: #aaaaaa;
+  --settings-background-color: #eeeeee;
+  --settings-text-color: #000000;
+  --settings-question-background-color: #dddddd;
+}
+
+body.dark-mode {
+  --background-color: #1F1F1E;
+  --content-background-color: #252525;
+  --content-border-color: #000000;
+  --entry-color: #f5f5f5;
+  --placeholder-color: #777777;
   --settings-background-color: #1f1f1e;
   --settings-text-color: #f5f5f5;
   --settings-question-background-color: #252525;
 }
+
 
 *, *::before, *::after {
   box-sizing: border-box;

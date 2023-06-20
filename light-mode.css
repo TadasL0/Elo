@@ -1,11 +1,11 @@
 :root {
-    --background-color: #3b3b3b;
-    --content-background-color: #e7e7e7;
-    --content-border-color: #000000;
-    --entry-color: #252525;
-    --placeholder-color: #aaaaaa;
-    --settings-background-color: #2b2b2b;
-    --settings-text-color: #b1b1b1;
-    --settings-question-background-color: #252525;
-  }
-  
+  --background-color: #f2f2f2; /* light gray for the outskirts */
+  --content-background-color: #ffffff; /* white for the textarea background */
+  --content-border-color: #cccccc;
+  --entry-color: #252525;
+  --placeholder-color: #aaaaaa;
+  --settings-background-color: #eeeeee;
+  --settings-text-color: #000000;
+  --settings-question-background-color: #dddddd;
+}
+
