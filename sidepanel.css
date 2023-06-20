@@ -11,9 +11,9 @@ body::-webkit-scrollbar {
 }
 
 #side-panel {
-  position: absolute;
+  position: relative;
   top: 0;
-  left: -100%; /* this will ensure the panel is fully offscreen, regardless of its width */
+  left: -250px;
   width: 250px;
   height: 100vh;
   background: #808080;
@@ -38,8 +38,8 @@ body::-webkit-scrollbar {
   flex-grow: 1;
   overflow: auto;
   padding: 20px;
-  background: var(--main-background-color);
-  color: var(--main-text-color);
+  background: #FFFFFF;
+  color: #000000;
 }
 
 .entry-list {
@@ -50,9 +50,9 @@ body::-webkit-scrollbar {
 .entry-list li {
   padding: 10px;
   margin-bottom: 5px;
-  background-color: var(--settings-question-background-color);
+  background-color: #FFFFFF;
   border-radius: 5px;
-  color: var(--settings-text-color);
+  color: #000000;
 }
 
 #entry-list .entry-item:first-child {
@@ -60,8 +60,8 @@ body::-webkit-scrollbar {
 }
 
 #sortable-editable-list {
-  height: 100%; /* adjust this as needed */
-  overflow-y: auto;
+  height: 100%; 
+  padding-top: 50px; /* added padding-top to push the list down */
 }
 
 #side-panel-button {
@@ -77,94 +77,9 @@ body::-webkit-scrollbar {
 .new-entry-button {
   position: absolute;
   right: 5px;
-}
-
-#delete-area {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 50px;
-  padding: 10px;
-  text-align: center;
-  background-color: red;
-  border: 2px dashed white;
-  color: white;
-  box-sizing: border-box;
-}
-body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-}
-
-body::-webkit-scrollbar {
-  display: none;
-}
-
-#side-panel {
-  position: relative;
-  top: 0;
-  left: -250px;
-  width: 250px;
-  height: 100vh;
-  background: var(--settings-background-color);
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  transition: left 0.3s ease-in-out;
-  overflow: auto; 
-  padding: 10px;
-  z-index: 9998;
-}
-
-#side-panel.show-panel {
-  left: 0;
-}
-
-#side-panel-content-wrapper {
-  position: relative;
-  height: 100%;
-  overflow: auto;
-}
-
-.container {
-  flex-grow: 1;
-  overflow: auto;
-  padding: 20px;
-  background: var(--main-background-color);
-  color: var(--main-text-color);
-}
-
-.entry-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.entry-list li {
-  padding: 10px;
-  margin-bottom: 5px;
-  background-color: var(--settings-question-background-color);
-  border-radius: 5px;
-  color: var(--settings-text-color);
-}
-
-#entry-list .entry-item:first-child {
-  margin-top: 50px;
-}
-
-#side-panel-button {
-  position: fixed;
-  left: 10px;
-  top: 10px;
-  font-size: 24px;
-  z-index: 10000;
-  cursor: pointer;
-  color: #fff;
-}
-
-.new-entry-button {
-  position: absolute;
-  right: 5px;
+  top: 1px; /* adjust as needed */
+  font-size: 22px; /* make the button a bit bigger */
+  color: white; /* adjust as needed */
 }
 
 #delete-area {
