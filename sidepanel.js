@@ -4,8 +4,14 @@ window.addEventListener("DOMContentLoaded", (event) => {
   const sidePanel = document.getElementById('side-panel');
   const sidePanelButton = document.getElementById('side-panel-button');
   const newEntryButton = document.querySelector('.new-entry-button');
+  
+  const entryList = document.getElementById('sortable-editable-list');
+  const deleteArea = document.getElementById('delete-area');
 
   loadEntriesFromLocalStorage();
+
+  // Event listener for new entry button
+  newEntryButton.addEventListener('click', createNewEntry);
 
   // Adjust the left property when the button is clicked
   sidePanelButton.addEventListener('click', () => {
@@ -28,23 +34,41 @@ window.addEventListener("DOMContentLoaded", (event) => {
       }, 200);
     }
   });
+
+  // DOOM DELETION AREA!
+  deleteArea.addEventListener('drop', (event) => {
+    event.preventDefault();
+    const id = event.dataTransfer.getData('text/plain');
+    const elementToRemove = document.getElementById(id);
+    if (elementToRemove) {
+      elementToRemove.remove();
+      // Save entries to local storage whenever an entry is deleted
+      saveEntriesToLocalStorage();
+    }
+  });
+
+  deleteArea.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+  });
+
+  // Initiate sortable
+  Sortable.create(entryList, {
+    animation: 150,
+    onEnd: saveEntriesToLocalStorage
+  });
 });
 
 // Function to create a new entry when the plus button is clicked
 function createNewEntry() {
   const entryList = document.getElementById('sortable-editable-list');
-  if (!entryList) {
-      console.error('Could not find sortable-editable-list element');
-      return;
-  }
+  const newEntryId = `entry-${Date.now()}`;
 
   const newEntry = document.createElement('li');
   newEntry.classList.add('sortable-item');
-  newEntry.setAttribute('draggable', 'true'); // This is new
-  newEntry.addEventListener('dragstart', (event) => { // This is new
-    event.dataTransfer.setData('text/plain', newEntry.id);
-  });
-
+  newEntry.setAttribute('draggable', 'true');
+  newEntry.setAttribute('id', newEntryId);
+  
   const newEntryText = document.createElement('span');
   newEntryText.classList.add('editable-text');
   newEntryText.setAttribute('contenteditable', 'true');
@@ -53,18 +77,13 @@ function createNewEntry() {
   newEntry.appendChild(newEntryText);
   entryList.appendChild(newEntry);
 
-  // Add event listener for double click to start editing
-  newEntryText.addEventListener('dblclick', (event) => {
-    event.target.setAttribute('contenteditable', 'true');
-  });
-
-  // Add event listener for enter key to stop editing
+  // Event listener for editing
+  newEntryText.addEventListener('dblclick', startEditing);
+  newEntryText.addEventListener('blur', stopEditing);
   newEntryText.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      event.target.setAttribute('contenteditable', 'false');
-      // Save entries to local storage whenever an entry is finished being edited
-      saveEntriesToLocalStorage();
+      stopEditing(event);
     }
   });
   
@@ -72,11 +91,20 @@ function createNewEntry() {
   saveEntriesToLocalStorage();
 }
 
+function startEditing(event) {
+  event.target.setAttribute('contenteditable', 'true');
+}
+
+function stopEditing(event) {
+  event.target.setAttribute('contenteditable', 'false');
+  saveEntriesToLocalStorage();
+}
+
 function saveEntriesToLocalStorage() {
   const entryList = document.getElementById('sortable-editable-list');
   const entries = Array.from(entryList.querySelectorAll('li'));
-  const entriesData = entries.map(entry => {
-    return { id: entry.id, innerText: entry.innerText };
+  const entriesData = entries.map((entry, index) => {
+    return { id: entry.id, innerText: entry.innerText, order: index };
   });
   localStorage.setItem('entries', JSON.stringify(entriesData));
 }
@@ -84,42 +112,30 @@ function saveEntriesToLocalStorage() {
 function loadEntriesFromLocalStorage() {
   const entriesData = JSON.parse(localStorage.getItem('entries'));
   if (entriesData) {
-    entriesData.forEach(entryData => {
+    const entryList = document.getElementById('sortable-editable-list');
+    entriesData.sort((a, b) => a.order - b.order).forEach(entryData => {
       const newEntry = document.createElement('li');
       newEntry.classList.add('sortable-item');
-      newEntry.id = entryData.id;
-      newEntry.setAttribute('draggable', 'true'); // This is new
-      newEntry.addEventListener('dragstart', (event) => { // This is new
-        event.dataTransfer.setData('text/plain', newEntry.id);
-      });
-
+      newEntry.setAttribute('draggable', 'true');
+      newEntry.setAttribute('id', entryData.id);
+      
       const newEntryText = document.createElement('span');
       newEntryText.classList.add('editable-text');
       newEntryText.setAttribute('contenteditable', 'true');
       newEntryText.innerText = entryData.innerText;
 
       newEntry.appendChild(newEntryText);
-      const entryList = document.getElementById('sortable-editable-list');
       entryList.appendChild(newEntry);
+
+      // Event listener for editing
+      newEntryText.addEventListener('dblclick', startEditing);
+      newEntryText.addEventListener('blur', stopEditing);
+      newEntryText.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          stopEditing(event);
+        }
+      });
     });
   }
 }
-
-// DOOM DELETION AREA!
-const deleteArea = document.getElementById('delete-area');
-
-deleteArea.addEventListener('drop', (event) => {
-  event.preventDefault();
-  const id = event.dataTransfer.getData('text/plain');
-  const elementToRemove = document.getElementById(id);
-  if (elementToRemove) {
-    elementToRemove.remove();
-    // Save entries to local storage whenever an entry is deleted
-    saveEntriesToLocalStorage();
-  }
-});
-
-deleteArea.addEventListener('dragover', (event) => {
-  event.preventDefault();
-  event.dataTransfer.dropEffect = 'move';
-});
