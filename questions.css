@@ -28,6 +28,7 @@
   color: var(--settings-text-color);
   border-radius: 20px;
   z-index: 9999;
+  pointer-events: none;  /* Add this line */
 }
 
 #questions-settings-panel.open {
@@ -86,4 +87,9 @@ textarea {
   .hide-panel {
     left: -100%;
   }
+}
+
+#questions-settings-panel.open {
+  right: 0;
+  pointer-events: auto;
 }
