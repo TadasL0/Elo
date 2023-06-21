@@ -73,7 +73,7 @@ body::before {
   border-radius: 20px;
   font-family: 'Inter', sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
-  background-color: #e9e9e9;
+  background-color: #ebebeb;
 }
 
 #journal-entry::placeholder {
@@ -119,7 +119,7 @@ body::before {
   transform: translateX(-100%);
   width: 250px;
   height: 100vh;
-  background: #8f8f8f;
+  background: #d1d1d1;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   transition: transform 0.3s ease-in-out;
   padding: 10px;

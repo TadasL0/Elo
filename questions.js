@@ -3,6 +3,8 @@ console.log('Running script');
 let fixedList;
 let editableList;
 
+let questions = []; // Array to store all questions
+
 function toggleQuestionsSettingsPanel() {
   const settingsPanel = document.getElementById('questions-settings-panel');
   const settingsIcon = document.getElementById('questions-settings-icon');
@@ -45,6 +47,9 @@ function loadOrder() {
       editableList.appendChild(item);
     }
   });
+
+  // Update questions array after loading order
+  updateQuestions();
 }
 
 function attachBlurListenerToQuestionItem(item) {
@@ -56,7 +61,31 @@ function attachBlurListenerToQuestionItem(item) {
     storedQuestions[questionId] = updatedQuestion;
     localStorage.setItem('editableQuestions', JSON.stringify(storedQuestions));
     console.log('Question renamed: ', updatedQuestion);
+
+    // Update questions array after question renaming
+    updateQuestions();
   });
+}
+
+// Function to update questions array
+function updateQuestions() {
+  const questionItems = document.querySelectorAll('.question-item');
+  questions = Array.from(questionItems).map(item => item.textContent);
+}
+
+// Function to change placeholder text
+function changePlaceholder() {
+  const totalQuestions = questions.length;
+  const randomIndex = Math.floor(Math.random() * totalQuestions);
+  const journalEntryTextarea = document.getElementById('journal-entry');
+
+  if (randomIndex < totalQuestions) {
+    const chosenQuestion = questions[randomIndex];
+    journalEntryTextarea.placeholder = chosenQuestion;
+    console.log('Placeholder changed: ', chosenQuestion);
+  } else {
+    console.error(`Index out of bounds: ${randomIndex}`);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -67,28 +96,23 @@ document.addEventListener('DOMContentLoaded', () => {
   Sortable.create(editableList, { group: 'shared', animation: 150, store: { get: (sortable) => {}, set: (sortable) => { storeOrder(); } } });
 
   document.getElementById('questions-settings-icon').addEventListener('click', toggleQuestionsSettingsPanel);
+  
   loadOrder();
 
   document.getElementById('journal-entry').addEventListener('input', function() {
     localStorage.setItem('journalEntry', this.value);
     console.log('Entry stored: ', this.value);
+  
+    if (this.value === '') {
+      changePlaceholder();
+    }
   });
 
   Array.from(editableList.children).forEach((item) => {
     attachBlurListenerToQuestionItem(item);
   });
+
+  // Update questions array and change placeholder immediately when the page loads
+  updateQuestions();
+  changePlaceholder();
 });
-
-function changeQuestion() {
-  const totalQuestions = fixedList.children.length + editableList.children.length;
-  const randomIndex = Math.floor(Math.random() * totalQuestions);
-  const questions = document.querySelectorAll('.question-item');
-
-  if (randomIndex < questions.length) {
-    const chosenQuestion = questions[randomIndex].textContent;
-    document.getElementById('question-display').textContent = chosenQuestion;
-    console.log('Question changed: ', chosenQuestion);
-  } else {
-    console.error(`Index out of bounds: ${randomIndex}`);
-  }
-}

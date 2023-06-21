@@ -1,10 +1,10 @@
 :root {
-    --background-color: #3f3f3f;
-    --content-background-color: #494949;
-    --content-border-color: #444444;
+    --background-color: #646464;
+    --content-background-color: #afafaf;
+    --content-border-color: rgb(192, 192, 192);
     --entry-color: #4b4b4b;
     --placeholder-color: #000000;
-    --settings-background-color: #414141;
+    --settings-background-color: #333333;
     --settings-text-color: #ffffff;
     --settings-question-background-color: #444444;
   }

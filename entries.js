@@ -96,3 +96,16 @@ function saveEntriesToLocalStorage() {
   });
   localStorage.setItem('entries', JSON.stringify(entriesToSave));
 }
+
+// Function to update placeholder text
+function updatePlaceholderText() {
+  const textarea = document.querySelector("#journal-entry");
+  if (entries.length > 0) {
+    const randomIndex = Math.floor(Math.random() * entries.length);
+    const randomEntry = entries[randomIndex];
+    textarea.placeholder = randomEntry.text;
+  }
+}
+
+// Set an interval to update placeholder text every 5 seconds
+setInterval(updatePlaceholderText, 5000);
