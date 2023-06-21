@@ -56,8 +56,8 @@ const loadOrder = () => {
 document.addEventListener("DOMContentLoaded", function() {
   console.log('DOMContentLoaded event');
   try {
-    window.fixedList = document.getElementById('fixed-question-list');
-    window.editableList = document.getElementById('editable-question-list');
+    window.fixedList = document.getElementById('predefined-question-list');
+    window.editableList = document.getElementById('user-question-list');
 
     Sortable.create(fixedList, {
       group: 'shared', 
