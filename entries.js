@@ -85,7 +85,6 @@ function drag(event) {
   event.dataTransfer.setData('text/plain', target.id);
 }
 
-
 function loadEntriesFromLocalStorage() {
   const savedEntries = JSON.parse(localStorage.getItem('entries') || "[]");
   const entryList = document.getElementById('entries-list');

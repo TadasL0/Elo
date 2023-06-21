@@ -1,5 +1,5 @@
 body {
-  top: 45px;
+  top: 5px;
   margin: 0;
   padding: 0;
   height: 100vh;
@@ -79,7 +79,7 @@ body {
 
 #entries-delete-area {
   position: absolute; /* Use absolute instead of static */
-  bottom: 10px; /* 0 instead of 200px */
+  bottom: 0; /* 0 instead of 200px */
   width: 220px;  /* match the width of the entries panel */
   height: 50px;
   padding: 10px;
