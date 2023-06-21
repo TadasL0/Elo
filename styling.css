@@ -28,6 +28,7 @@ body.dark-mode {
 body, html {
   margin: 0;
   padding: 0;
+  top: 20px;
   background-color: var(--background-color);
   justify-content: flex-end;
   position: relative;
