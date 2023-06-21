@@ -31,7 +31,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
           entry.style.opacity = "0";
         });
         newEntryButton.style.opacity = "0";
-        entriesDeleteArea.style.opacity = "0";
       }, 200); 
     } else {
       entriesPanel.style.left = "0px";
@@ -40,7 +39,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
           entry.style.opacity = "1";
         });
         newEntryButton.style.opacity = "1";
-        entriesDeleteArea.style.opacity = "1";
       }, 200);
     }
   });

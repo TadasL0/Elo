@@ -20,6 +20,10 @@ body {
   overflow: auto; 
   padding: 10px 50px 10px 10px; /* Adjust the padding on the right */
   z-index: 99989;
+  border-top-right-radius: 15px; /* Add this for top right rounded corner */
+  border-bottom-right-radius: 15px; /* Add this for bottom right rounded corner */
+  display: flex; /* add this */
+  flex-direction: column; /* add this */
 }
 
 ::-webkit-scrollbar {
@@ -32,7 +36,8 @@ body {
 
 #entries-panel-content-wrapper {
   height: 100%;
-  overflow: auto;
+  flex-grow: 1; /* add this, it will take all available space */
+  overflow: auto; /* it will have its own scroll if the content is too long */
 }
 
 .entries-list {
@@ -61,20 +66,21 @@ body {
   z-index: 10000;
   cursor: pointer;
   color: #fff;
+  
 }
 
 .new-entry-button {
   position: absolute;
-  right: 5px;
-  top: 1px;
+  right: 10px;
+  top: 10px;
   font-size: 22px;
   color: white;
 }
 
 #entries-delete-area {
-  position: absolute;
+  position: static;
   bottom: 0;
-  width: 100%;
+  width: 250px;  /* match the width of the entries panel */
   height: 50px;
   padding: 10px;
   text-align: center;
@@ -83,3 +89,4 @@ body {
   color: white;
   box-sizing: border-box;
 }
+
