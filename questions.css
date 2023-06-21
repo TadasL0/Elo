@@ -1,35 +1,3 @@
-:root {
-  --background-color: #1F1F1E;
-  --text-color: #f5f5f5;
-  --content-background-color: #f5f5f5;
-  --entry-color: #252525;
-  --placeholder-color: #000000;
-  --panel-background-color: #424242;
-  --entry-text-color: #000000; /* Dark text for light mode */
-  --entry-background-color: #ffffff; /* Light background for light mode */
-  --settings-background-color: #ffffff;
-  --settings-text-color: #000000;
-  --settings-question-background-color: #eeeeee;
-}
-
-body.dark-mode {
-  --background-color: #000000;
-  --text-color: #ffffff;
-  --content-background-color: #353535;
-  --entry-color: #ffffff;
-  --placeholder-color: #cccccc;
-  --panel-background-color: #212121;
-  --entry-text-color: #ffffff; /* Light text for dark mode */
-  --entry-background-color: #353535; /* Dark background for dark mode */
-  --settings-background-color: #333333;
-  --settings-text-color: #ffffff;
-  --settings-question-background-color: #555555;
-}
-
-/* ...existing styles... */
-
-/* ...existing styles... */
-
 #questions-settings-container {
   position: fixed;
   top: 10px;
@@ -76,14 +44,15 @@ body.dark-mode {
   100% { transform: rotate(360deg); }
 }
 
-#sortable-question-list {
+#predefined-question-list,
+#user-question-list {
   list-style-type: none;
   padding: 0;
   background-color: var(--settings-question-background-color);
 }
 
-#sortable-question-list li,
-.sortable-list li {
+#predefined-question-list li,
+#user-question-list li {
   padding: 10px;
   margin-bottom: 5px;
   background-color: var(--settings-question-background-color);
@@ -92,25 +61,18 @@ body.dark-mode {
   color: var(--settings-text-color);
 }
 
-.sortable-list {
-  max-height: 45vh;
-  overflow-y: auto;
-  list-style: none;
-  padding-left: 0;
-}
-
 textarea {
   margin: 0;
   padding: 0;
   text-indent: 0;
 }
 
-#sortable-fixed-list, #sortable-editable-list {
+#predefined-question-list, #user-question-list {
   overflow: auto;
   scrollbar-width: none;
 }
 
-#sortable-fixed-list::-webkit-scrollbar, #sortable-editable-list::-webkit-scrollbar {
+#predefined-question-list::-webkit-scrollbar, #user-question-list::-webkit-scrollbar {
   display: none;
 }
 
@@ -125,4 +87,3 @@ textarea {
     left: -100%;
   }
 }
-
