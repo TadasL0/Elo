@@ -1,4 +1,5 @@
 body {
+  top: 10px;
   margin: 0;
   padding: 0;
   height: 100vh;
@@ -8,17 +9,21 @@ body {
 }
 
 #entries-panel {
-  position: absolute; /* Changed from relative to absolute */
+  position: absolute;
   top: 0;
-  left: -250px;
-  width: 250px;
+  left: -250px; /* Change this too, so it fully hides when not in use */
+  width: 250px; /* Change the panel width here */
   height: 100vh;
   background: #646464;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   transition: left 0.3s ease-in-out;
   overflow: auto; 
-  padding: 10px;
+  padding: 10px 50px 10px 10px; /* Adjust the padding on the right */
   z-index: 99989;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 #entries-panel.show-panel {
@@ -41,10 +46,6 @@ body {
   background-color: #FFFFFF;
   border-radius: 5px;
   color: #000000;
-}
-
-#entries-list .entry-item:first-child {
-  margin-top: 50px;
 }
 
 #entries-list {

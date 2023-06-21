@@ -15,47 +15,45 @@
 </head>
 <body>
   <!-- Entries Section -->
-<div id="entries-panel-button">
-  <i class="fas fa-book"></i>
-</div>
-<div id="entries-panel" class="entries-panel hide-panel">
-  <div id="entries-panel-content-wrapper">
-    <div id="entries-panel-content">
-      <div class="new-entry-button"></div><i class="fas fa-plus"></i></div>
-      <ul id="entries-list" class="entries-list">
-        <!-- ... -->
+  <div id="entries-panel-button">
+    <i class="fas fa-book"></i>
+  </div>
+  <div id="entries-panel" class="entries-panel hide-panel">
+    <div id="entries-panel-content-wrapper">
+      <div id="entries-panel-content">
+        <div class="new-entry-button"><i class="fas fa-plus"></i></div>
+        <ul id="entries-list" class="entries-list">
+          <!-- ... -->
+        </ul>
+      </div>
+      <div id="entries-delete-area">
+        <i class="fas fa-trash"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Questions Section -->
+  <div id="questions-settings-container">
+    <div id="questions-settings-icon" onclick="toggleCustomSettingsPanel()">
+      <i class="fas fa-cog"></i>
+    </div>
+    <div id="questions-settings-panel" class="hide-settings-panel">
+      <h3>Prompts you may like:</h3>
+      <ul id="predefined-question-list" class="questions-list">
+        <li class="question-item">What's on your mind right now?</li>
+        <li class="question-item">What do you want and why?</li>
+        <li class="question-item">What's a problem you haven't solved that would benefit your life most, if you did?</li>
+        <li class="question-item">What have you not acknowledged about yourself?</li>
+        <li class="question-item">What skill would serve you best right now?</li>
       </ul>
-    </div>
-    <div id="entries-delete-area">
-      <i class="fas fa-trash"></i>
-    </div>
+      <h3>Create your own prompt!</h3>
+      <ul id="user-question-list" class="questions-list">
+        <li class="question-item"><span class="drag-handle"></span> <span contenteditable="true">Click to change this prompt.</span></li>
+        <li class="question-item"><span class="drag-handle"></span> <span contenteditable="true">Click to change this prompt.</span></li>
+        <li class="question-item"><span class="drag-handle"></span> <span contenteditable="true">Click to change this prompt.</span></li>
+      </ul>
+    </div>    
   </div>
-</div>
-<div class="entries-toggle-button" id="entries-toggle-button">
-<div></div>
-</div>     
-<!-- Questions Section -->
-<div id="questions-settings-container">
-  <div id="questions-settings-icon" onclick="toggleCustomSettingsPanel()">
-    <i class="fas fa-cog"></i>
-  </div>
-  <div id="questions-settings-panel" class="hide-settings-panel">
-    <h3>Prompts you may like:</h3>
-    <ul id="predefined-question-list" class="questions-list">
-      <li class="question-item">What's on your mind right now?</li>
-      <li class="question-item">What do you want and why?</li>
-      <li class="question-item">What's a problem you haven't solved that would benefit your life most, if you did?</li>
-      <li class="question-item">What have you not acknowledged about yourself?</li>
-      <li class="question-item">What skill would serve you best right now?</li>
-    </ul>
-    <h3>Create your own prompt!</h3>
-    <ul id="user-question-list" class="questions-list">
-      <li class="question-item"><span class="drag-handle"></span> <span contenteditable="true">Click to change this prompt.</span></li>
-      <li class="question-item"><span class="drag-handle"></span> <span contenteditable="true">Click to change this prompt.</span></li>
-      <li class="question-item"><span class="drag-handle"></span> <span contenteditable="true">Click to change this prompt.</span></li>
-    </ul>
-  </div>    
-</div>
   <div class="container">
     <div class="content">
       <div class="toggle-container">

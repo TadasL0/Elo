@@ -20,18 +20,12 @@ body.dark-mode {
   --settings-question-background-color: #252525;
 }
 
-
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
 body, html {
-  margin: 0;
   padding: 0;
-  top: 20px;
-  background-color: var(--background-color);
-  justify-content: flex-end;
-  position: relative;
   font-family: 'Inter', sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
