@@ -208,7 +208,7 @@ body::before {
 }
 
 body.dark-mode {
-  background-color: #ececec;
+  background-color: #292929;
   color: #777777;
 }
 
