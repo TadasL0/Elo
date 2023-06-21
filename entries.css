@@ -4,8 +4,8 @@ body {
   padding: 0;
   height: 100vh;
   overflow: hidden;
-  background-color: var(--background-color);  /* Add your desired color here */
-  position: relative; /* Added */
+  background-color: var(--background-color);
+  position: relative;
 }
 
 #entries-panel {
@@ -13,8 +13,8 @@ body {
   top: 0;
   left: -250px;
   width: 250px;
-  height: calc(100vh - 100px); /* updated */
-  background: #646464;
+  height: calc(100vh - 100px);
+  background: var(--content-background-color);
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   transition: left 0.3s ease-in-out;
   overflow: auto; 
@@ -24,10 +24,6 @@ body {
   border-bottom-right-radius: 15px;
   display: flex;
   flex-direction: column;
-}
-
-::-webkit-scrollbar {
-  display: none;
 }
 
 #entries-panel.show-panel {
@@ -48,9 +44,9 @@ body {
 .entries-list li {
   padding: 10px;
   margin-bottom: 5px;
-  background-color: #FFFFFF;
+  background-color: var(--entry-color);
   border-radius: 5px;
-  color: #000000;
+  color: var(--entry-text-color);
 }
 
 #entries-list {
@@ -65,8 +61,7 @@ body {
   font-size: 24px;
   z-index: 10000;
   cursor: pointer;
-  color: #fff;
-  
+  color: var(--entry-text-color);
 }
 
 .new-entry-button {
@@ -74,18 +69,18 @@ body {
   right: 10px;
   top: 10px;
   font-size: 22px;
-  color: white;
+  color: var(--entry-text-color);
 }
 
 #entries-delete-area {
-  position: absolute; /* Use absolute instead of static */
-  bottom: 0; /* 0 instead of 200px */
-  width: 220px;  /* match the width of the entries panel */
+  position: absolute;
+  bottom: 20px;
+  width: 220px;
   height: 50px;
   padding: 10px;
   text-align: center;
   background-color: red;
-  border: 2px dashed white;
-  color: white;
+  border: 2px dashed var(--entry-text-color);
+  color: var(--entry-text-color);
   box-sizing: border-box;
 }
