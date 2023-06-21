@@ -26,8 +26,8 @@ function storeOrder() {
 
 const loadOrder = () => {
   console.log('loadOrder called');
-  const fixedOrder = localStorage.getItem('fixedOrder');
-  const editableOrder = localStorage.getItem('editableOrder');
+  var fixedOrder = Array.from(fixedList.children).map(li => li.querySelector('.question-item').textContent);
+  var editableOrder = Array.from(editableList.children).map(li => li.querySelector('.question-item').textContent);
 
   console.log('fixedOrder:', fixedOrder);
   console.log('editableOrder:', editableOrder);
@@ -56,8 +56,8 @@ const loadOrder = () => {
 document.addEventListener("DOMContentLoaded", function() {
   console.log('DOMContentLoaded event');
   try {
-    window.fixedList = document.getElementById('sortable-fixed-list');
-    window.editableList = document.getElementById('sortable-editable-list');
+    window.fixedList = document.getElementById('fixed-question-list');
+    window.editableList = document.getElementById('editable-question-list');
 
     Sortable.create(fixedList, {
       group: 'shared', 
@@ -83,6 +83,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     loadOrder();
+
+    document.getElementById('questions-settings-icon').addEventListener('click', toggleQuestionsSettingsPanel);
+
   } catch (error) {
     console.error('Error in DOMContentLoaded event handler:', error);
   }
