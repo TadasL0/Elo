@@ -25,6 +25,7 @@ body.dark-mode {
 }
 
 body, html {
+  margin-top: 45px;
   padding: 0;
   font-family: 'Inter', sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
