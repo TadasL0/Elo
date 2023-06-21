@@ -76,8 +76,15 @@ function createNewEntry(entry) {
 }
 
 function drag(event) {
-  event.dataTransfer.setData('text/plain', event.target.id);
+  let target = event.target;
+  while (target && target.nodeName !== "LI") {
+    target = target.parentNode;
+  }
+  if (!target) return;
+  event.stopPropagation();
+  event.dataTransfer.setData('text/plain', target.id);
 }
+
 
 function loadEntriesFromLocalStorage() {
   const savedEntries = JSON.parse(localStorage.getItem('entries') || "[]");
