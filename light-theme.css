@@ -14,4 +14,7 @@ body {
   //adding new entries button
   --add-button-background-color: #ffffff; /* white */
   --add-button-icon-color: #000000; /* black */
+  //levelup bar
+  --top-bar-background-color: #8b8b8b; /* replace with your actual color */
+  --xp-bar-empty-color: #31032f; /* replace with your actual color */
 }

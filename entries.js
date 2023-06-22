@@ -12,6 +12,11 @@ let currentEntryId = null;
 window.addEventListener('load', function() {
   entries = loadEntriesFromLocalStorage();
 
+  // Set currentEntryId to the first entry ID if entries array is not empty
+  if (entries.length > 0) {
+    currentEntryId = entries[0].id;
+  }
+
   const addEntryButton = document.querySelector('.new-entry-button');
   addEntryButton.addEventListener('click', addNewEntry);
 
@@ -52,6 +57,9 @@ function addNewEntry() {
   entries.push(entry);
   createNewEntry(entry);
   saveEntriesToLocalStorage();
+
+  // Set currentEntryId to the ID of the new entry
+  currentEntryId = entry.id;
 }
 
 function createNewEntry(entry) {

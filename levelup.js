@@ -1,47 +1,50 @@
+"use strict";
+
+let previousTextareaLength = 0;
+
+function loadXPFromLocalStorage() {
+  const xp = localStorage.getItem('xp');
+  return xp ? parseInt(xp, 10) : 0;
+}
+
+function saveXPToLocalStorage(xp) {
+  localStorage.setItem('xp', xp.toString());
+}
+
 function updateEntry() {
-    const textarea = document.getElementById('journal-entry');
-    const currentEntry = entries.find(entry => entry.id === currentEntryId);
-    if (currentEntry) {
-      currentEntry.content = textarea.value;
-      increaseXP(textarea.value.length); // Added this line
-      saveEntriesToLocalStorage();
-    }
-  }
-  
-  function increaseXP(points) {
-    let xp = loadXPFromLocalStorage();
-    xp += points;
-    document.getElementById('progress-bar').value = xp % 1000;
-    document.getElementById('xp-bar').innerText = `Level ${Math.floor(xp / 1000) + 1}: `;
-    saveXPToLocalStorage(xp);
-  }
-  
-  function loadXPFromLocalStorage() {
-    return parseInt(localStorage.getItem('xp') || "0");
-  }
-  
-  function saveXPToLocalStorage(xp) {
-    localStorage.setItem('xp', xp.toString());
+  const textarea = document.getElementById('journal-entry');
+  const currentTextareaLength = textarea.value.length;
+
+  if(currentTextareaLength > previousTextareaLength) {
+    const difference = currentTextareaLength - previousTextareaLength; 
+    increaseXP(difference); 
+    console.log('XP should have been increased.'); 
   }
 
-  window.onload = function() {
-    entries = loadEntriesFromLocalStorage();
-    const xp = loadXPFromLocalStorage();
-    document.getElementById('progress-bar').value = xp % 1000;
-    document.getElementById('xp-bar').innerText = `Level ${Math.floor(xp / 1000) + 1}: `;
-  
-    const addEntryButton = document.querySelector('.new-entry-button');
-    addEntryButton.addEventListener('click', addNewEntry);
-  
-    const textarea = document.getElementById('journal-entry');
-    textarea.addEventListener('input', updateEntry);
-  
-    const entriesPanelButton = document.getElementById('entries-panel-button');
-    entriesPanelButton.addEventListener('click', toggleEntriesPanel);
-  };
-  
-  function updateXPBar(xp) {
-    const xpBar = document.getElementById('xp-bar');
-    xpBar.style.width = `${xp}%`;  /* This assumes xp is a percentage */
+  previousTextareaLength = currentTextareaLength;
+}
+
+function increaseXP(points) {
+  let xp = loadXPFromLocalStorage();
+  xp += points;
+  const widthPercentage = (xp % 1000) / 10; 
+
+  console.log(`XP: ${xp}, Width Percentage: ${widthPercentage}`);
+
+  let xpBarElement = document.getElementById('xp-bar');
+  if(xpBarElement) {
+    xpBarElement.style.width = `${widthPercentage}%`;
   }
   
+  saveXPToLocalStorage(xp);
+}
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const xp = loadXPFromLocalStorage();
+  document.getElementById('xp-bar').style.width = `${(xp % 1000) / 10}%`;
+  document.getElementById('xp-bar-container').innerText = `Level ${Math.floor(xp / 1000) + 1}: `;
+
+  const textarea = document.getElementById('journal-entry');
+  textarea.addEventListener('input', updateEntry);
+});
