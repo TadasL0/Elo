@@ -1,2 +1,2 @@
-# Skill
-A dojo for your brain.
+# Elo
+Level up your brain, maximize cognitive evolution.

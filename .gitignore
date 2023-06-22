@@ -3,3 +3,4 @@
 /db.dump
 CNAME
 links.env
+/__tests__
