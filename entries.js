@@ -123,7 +123,6 @@ function removeEntryById(id) {
   const elementToRemove = document.getElementById(id);
   if (elementToRemove) {
     elementToRemove.remove();
-    entries = entries.filter(entry => entry.id !== id);
     saveEntriesToLocalStorage();
   }
 }
