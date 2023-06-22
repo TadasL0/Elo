@@ -69,7 +69,8 @@ body {
   right: 10px;
   top: 10px;
   font-size: 22px;
-  color: var(--entry-text-color);
+  background-color: var(--add-button-background-color);
+  color: var(--add-button-icon-color);
 }
 
 #entries-delete-area {

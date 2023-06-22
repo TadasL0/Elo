@@ -11,4 +11,7 @@ body {
   --settings-question-background-color: #d3d3d3;
   --icon-color: #3f3f3f;  /* dark gray */
   --textarea-background-color: #ebebeb;  /* white for light mode */
+  //adding new entries button
+  --add-button-background-color: #ffffff; /* white */
+  --add-button-icon-color: #000000; /* black */
 }
