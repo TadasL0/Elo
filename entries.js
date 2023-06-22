@@ -20,6 +20,31 @@ window.addEventListener('load', function() {
 
   const entriesPanelButton = document.getElementById('entries-panel-button');
   entriesPanelButton.addEventListener('click', toggleEntriesPanel);
+
+  const entriesList = document.getElementById('entries-list');
+  const deleteArea = document.getElementById('entries-delete-area');
+
+  entriesList.addEventListener('dragstart', function(event) {
+    event.dataTransfer.setData('text/plain', event.target.id);
+  });
+
+  deleteArea.addEventListener('dragover', function(event) {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+  });
+
+  deleteArea.addEventListener('drop', function(event) {
+    event.preventDefault();
+    const id = event.dataTransfer.getData('text');
+    removeEntry(id);
+    const element = document.getElementById(id);
+    element.parentNode.removeChild(element);
+  });
+
+  entries.forEach(entry => {
+    const element = document.getElementById(entry.id);
+    element.draggable = true;
+  });
 });
 
 function addNewEntry() {
@@ -32,7 +57,7 @@ function addNewEntry() {
 function createNewEntry(entry) {
   const entryList = document.getElementById('entries-list');
   const newEntryHTML = `
-    <li id="${entry.id}" class="entry-item" data-id="${entry.id}">
+    <li id="${entry.id}" class="entry-item" data-id="${entry.id}" draggable="true">
       <div>
         <span class="drag-handle"></span>
         <span contenteditable="true">${entry.text}</span>
