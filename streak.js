@@ -30,4 +30,5 @@ window.onload = function() {
   updateStreak();
 };
 
-module.exports = { updateStreak };
+window.updateStreak = updateStreak;
+

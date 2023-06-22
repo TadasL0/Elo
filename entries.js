@@ -12,7 +12,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
   const entriesPanelButton = document.getElementById('entries-panel-button');
   const newEntryButton = document.querySelector('.new-entry-button');
   const entriesDeleteArea = document.getElementById('entries-delete-area');
-  
+  const entriesList = document.getElementById('entries-list');  // Add this line
+
   let entries = loadEntriesFromLocalStorage();
 
   Sortable.create(entriesList, {
@@ -27,16 +28,20 @@ window.addEventListener("DOMContentLoaded", (event) => {
   newEntryButton.addEventListener('click', () => {
     const newEntry = new Entry();
     entries.push(newEntry);
+    console.log(entries);  // Add this line
     createNewEntry(newEntry);
     saveEntriesToLocalStorage();
   });
 
   entriesPanelButton.addEventListener('click', () => {
-    toggleEntriesPanel();
+    if(entriesPanel) {  // Add this line
+      toggleEntriesPanel();
+    }
   });
 
   entriesDeleteArea.addEventListener('drop', (event) => {
     const id = event.dataTransfer.getData('text/plain');
+    if (!id) return;  // Add this line
     removeEntryById(id);
   });
 
@@ -119,18 +124,28 @@ function updatePlaceholderText() {
   }
 }
 
+const faBookIcon = document.getElementById('fa-book-icon');
+const entriesPanel = document.getElementById('entries-panel');  // Move this line outside of the event listener
+
+faBookIcon.addEventListener('click', () => {
+  if(entriesPanel) {
+    toggleEntriesPanel();
+  }
+});
+
+
 function toggleEntriesPanel() {
   const entriesPanel = document.getElementById('entries-panel');
   const panelEntries = document.querySelectorAll('#entries-list .entry-item');
   const newEntryButton = document.querySelector('.new-entry-button');
-  
-  const isPanelOpen = entriesPanel.style.left === "0px";
 
-  entriesPanel.style.left = isPanelOpen ? "-300px" : "0px";
-  setTimeout(() => {
-    panelEntries.forEach(entry => {
-      entry.style.opacity = isPanelOpen ? "0" : "1";
-    });
-    newEntryButton.style.opacity = isPanelOpen ? "0" : "1";
-  }, 200);
+  const isPanelOpen = getComputedStyle(entriesPanel).left === "0px";
+  
+  entriesPanel.style.left = isPanelOpen ? "-250px" : "0px";
+
+  panelEntries.forEach(entry => {
+    entry.style.opacity = isPanelOpen ? "1" : "1";
+  });
+  newEntryButton.style.opacity = isPanelOpen ? "1" : "1";
 }
+
