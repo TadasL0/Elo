@@ -1,24 +1,11 @@
-:root {
-  --background-color: #f2f2f2; /* light gray for the outskirts */
-  --content-background-color: #ffffff; /* white for the textarea background */
-  --content-border-color: #000000;
-  --entry-color: #000000;
-  --placeholder-color: #000000;
-  --settings-background-color: #eeeeee;
-  --settings-text-color: #000000;
-  --settings-question-background-color: #dddddd;
+#main-text-area {
+  color: var(--main-text-color);
 }
 
-body.dark-mode {
-  --background-color: #1F1F1E;
-  --content-background-color: #252525;
-  --content-border-color: #000000;
-  --entry-color: #f5f5f5;
-  --placeholder-color: #ffffff;
-  --settings-background-color: #1f1f1e;
-  --settings-text-color: #f5f5f5;
-  --settings-question-background-color: #252525;
+textarea {
+  color: var(--main-text-color);
 }
+
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -60,7 +47,7 @@ body::before {
 
 #journal-entry {
   font-size: 16px;
-  color: var(--entry-color);
+  color: var(--entry-text-color);  /* changed from --entry-color to --entry-text-color */
   width: 100%;
   height: 700px;
   margin-bottom: 20px;
@@ -81,20 +68,6 @@ body::before {
   color: var(--placeholder-color);
 }
 
-#color-options {
-  display: flex;
-  flex-direction: column;
-}
-
-.color-option {
-  width: 30px;
-  height: 30px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: background-color 0.3s ease;
-}
-
 #streak {
   display: flex;
   align-items: center;
@@ -111,24 +84,6 @@ body::before {
 .fa-fire {
   color: #4a72f5;
   font-size: 24px;
-}
-
-#side-panel {
-  position: fixed;
-  top: 0;
-  left: 0;
-  transform: translateX(-100%);
-  width: 250px;
-  height: 100vh;
-  background: #d1d1d1;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease-in-out;
-  padding: 10px;
-  z-index: 9998;
-}
-
-#side-panel.show-panel {
-  transform: translateX(0);
 }
 
 @media only screen and (min-width: 601px) {
@@ -199,98 +154,4 @@ body::before {
   color: white;
 }
 
-.loading-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 3000;
-}
 
-body.dark-mode {
-  background-color: #292929;
-  color: #ffffff;
-}
-
-body.dark-mode #journal-entry {
-  background-color: #252525;
-  color: #f5f5f5;
-}
-
-body.dark-mode .content {
-  background-color: #161616;
-  color: #f5f5f5;
-  border-color: #616161;
-}
-
-#questions-settings-container {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 9999;
-}
-
-#questions-settings-icon {
-  font-size: 1.5em;
-  cursor: pointer;
-  z-index: 10000;
-  transition: opacity 0.3s linear;
-}
-
-#questions-settings-panel {
-  position: fixed;
-  border: 4px solid var(--content-border-color);
-  border-radius: 10px;
-  top: 40px;
-  right: -250px;
-  width: 250px;
-  height: 80.5vh;
-  background: var(--settings-background-color);
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease-in-out, right 0.3s ease-in-out;
-  overflow: auto; 
-  padding: 10px;
-  color: var(--settings-text-color);
-  border-radius: 20px;
-  z-index: 9999;
-}
-
-#questions-settings-panel.open {
-  right: 0;
-  pointer-events: auto;
-}
-
-#questions-settings-icon.spin {
-  animation: spin 0.3s linear forwards;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-#sortable-question-list {
-  list-style-type: none;
-  padding: 0;
-  background-color: var(--settings-question-background-color);
-}
-
-#sortable-question-list li {
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 10px;
-  cursor: move;
-}
-
-/* For light mode */
-.fas.fa-cog, .fas.fa-book {
-  color: #eeeeee; /* or whatever color you want in light mode */
-  transition: color 0.3s ease;
-}
-
-/* For dark mode */
-body.dark-mode .fas.fa-cog, body.dark-mode .fas.fa-book {
-  color: #8d8d8d; /* or whatever color you want in dark mode */
-  transition: color 0.3s ease;
-}

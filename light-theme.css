@@ -1,13 +1,13 @@
 :root {
-  --background-color: #747474; /* light gray for the outskirts */
-  --content-background-color: #363636; /* white for the textarea background */
-  --content-border-color: #030303;
+  --main-text-color: #000000;
+  --background-color: #f5f5f5; /* light gray for the outskirts */
+  --content-background-color: #ffffff; /* white for the textarea background */
+  --content-border-color: #e0e0e0;
   --entry-color: #000000;
-  --entry-text-color: #000000;
-  --placeholder-color: #000000;
-  --settings-background-color: #383737;
+  --entry-text-color: #fafafa;
+  --placeholder-color: #c2c2c2; /* make placeholder slightly lighter */
+  --settings-background-color: #f0f0f0;
   --settings-text-color: #000000;
-  --settings-question-background-color: #000000;
+  --settings-question-background-color: #d3d3d3;
 }
 
-  //plot twist this is actually DARK MODE

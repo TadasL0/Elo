@@ -1,12 +1,12 @@
 :root {
-    --background-color: #646464;
-    --content-background-color: #afafaf;
-    --content-border-color: rgb(192, 192, 192);
-    --entry-color: #dadada;
-    --placeholder-color: #000000;
-    --settings-background-color: #333333;
-    --settings-text-color: #ffffff;
-    --settings-question-background-color: #444444;
-  }
-  
-  //plot twist this is actually LIGHT MODE
+  --main-text-color: #000000;
+  --background-color: #646464;
+  --content-background-color: #afafaf;
+  --content-border-color: rgb(192, 192, 192);
+  --entry-color: #000000;  /* Change entry color to black for dark theme */
+  --entry-text-color: #000000;  /* Change entry text color to black for dark theme */
+  --placeholder-color: #000000;
+  --settings-background-color: #333333;
+  --settings-text-color: #ffffff;
+  --settings-question-background-color: #444444;
+}
