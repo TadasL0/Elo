@@ -31,7 +31,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     console.log(entries);  // Add this line
     createNewEntry(newEntry);
     saveEntriesToLocalStorage();
-  });
+  });  
 
   entriesPanelButton.addEventListener('click', () => {
     if(entriesPanel) {  // Add this line
@@ -77,9 +77,22 @@ function drag(event) {
 }
 
 function loadEntriesFromLocalStorage() {
-  const savedEntries = JSON.parse(localStorage.getItem('entries') || "[]");
-  const entryOrder = JSON.parse(localStorage.getItem('entryOrder') || []);
+  let savedEntries;
+  try {
+    savedEntries = JSON.parse(localStorage.getItem('entries') || "[]");
+  } catch(e) {
+    console.error("Error parsing entries from local storage:", e);
+    savedEntries = [];
+  }
   
+  let entryOrder;
+  try {
+    entryOrder = JSON.parse(localStorage.getItem('entryOrder') || "[]");
+  } catch(e) {
+    console.error("Error parsing entry order from local storage:", e);
+    entryOrder = [];
+  }
+
   savedEntries.sort((a, b) => {
     const indexA = entryOrder.indexOf(a.id);
     const indexB = entryOrder.indexOf(b.id);
