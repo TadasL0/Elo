@@ -1,12 +1,14 @@
-:root {
+body.dark-mode {
   --main-text-color: #000000;
-  --background-color: #646464;
-  --content-background-color: #afafaf;
-  --content-border-color: rgb(192, 192, 192);
-  --entry-color: #000000;  /* Change entry color to black for dark theme */
-  --entry-text-color: #000000;  /* Change entry text color to black for dark theme */
-  --placeholder-color: #000000;
+  --background-color: #303030;
+  --content-background-color: #292929;
+  --content-border-color: rgb(95, 95, 95);
+  --entry-color: #000000;
+  --entry-text-color: #ffffff;
+  --placeholder-color: #ffffff;
   --settings-background-color: #333333;
   --settings-text-color: #ffffff;
   --settings-question-background-color: #444444;
+  --icon-color: #B3B3B3;  /* slightly brighter gray */
+  --textarea-background-color: #444444;  /* dark gray for dark mode */
 }
