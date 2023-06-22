@@ -20,11 +20,11 @@
 <div id="entries-panel-button">
   <i class="fas fa-book" id="fa-book-icon"></i>
 </div>
-<div id="entries-panel" class="entries-panel hide-panel">
+<div id="entries-panel" class="entries-panel entries-panel-hidden">
   <div id="entries-panel-content-wrapper">
     <div id="entries-panel-content">
       <div class="new-entry-button"><i class="fas fa-plus"></i></div>
-      <ul id="entries-list" class="entries-list">
+      <ul id="entries-list" class="entries-list" ondrop="drop(event)" ondragover="allowDrop(event)">
         <!-- List items will be added here by the script -->
       </ul>
     </div>

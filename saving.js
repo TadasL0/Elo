@@ -73,7 +73,6 @@ const loadFromLocalStore = (key) => {
 const setupPage = () => {
   try {
     const journalEntryElement = document.getElementById("journal-entry");
-    journalEntryElement.addEventListener("input", autosaveEntry);
     
     const savedEntry = loadFromLocalStore(LOCAL_STORAGE_KEY);
     if (savedEntry) {

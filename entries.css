@@ -11,7 +11,6 @@ body {
 #entries-panel {
   position: absolute;
   top: 0;
-  left: -300px;
   width: 250px;
   height: calc(100vh - 100px);
   background: var(--content-background-color);
@@ -27,7 +26,11 @@ body {
   flex-direction: column;
 }
 
-#entries-panel.show-panel {
+.entries-panel-hidden {
+  left: -300px;
+}
+
+.entries-panel-visible {
   left: 0;
 }
 

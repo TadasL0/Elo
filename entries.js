@@ -1,5 +1,5 @@
 class Entry {
-  constructor(id = `entry-${Date.now()}`, text = 'Click to change this prompt.', content = '') {
+  constructor(id = `entry-${Date.now()}`, text = 'Click to edit this entry.', content = '') {
     this.id = id;
     this.text = text;
     this.content = content;
@@ -9,15 +9,18 @@ class Entry {
 let entries = [];
 let currentEntryId = null;
 
-window.onload = function() {
+window.addEventListener('load', function() {
   entries = loadEntriesFromLocalStorage();
 
-  const addEntryButton = document.getElementById('add-entry-button');
+  const addEntryButton = document.querySelector('.new-entry-button');
   addEntryButton.addEventListener('click', addNewEntry);
 
   const textarea = document.getElementById('journal-entry');
   textarea.addEventListener('input', autosaveEntry);
-};
+
+  const entriesPanelButton = document.getElementById('entries-panel-button');
+  entriesPanelButton.addEventListener('click', toggleEntriesPanel);
+});
 
 function addNewEntry() {
   const entry = new Entry();
@@ -29,7 +32,7 @@ function addNewEntry() {
 function createNewEntry(entry) {
   const entryList = document.getElementById('entries-list');
   const newEntryHTML = `
-    <li id="${entry.id}" draggable="true" class="entry-item" ondragstart="drag(event)" data-id="${entry.id}">
+    <li id="${entry.id}" class="entry-item" data-id="${entry.id}">
       <div>
         <span class="drag-handle"></span>
         <span contenteditable="true">${entry.text}</span>
@@ -78,22 +81,8 @@ function removeEntry(id) {
   saveEntriesToLocalStorage();
 }
 
-// Implement the drag and drop functions
-function drag(event) {
-  const entryItem = event.target.closest('.entry-item');
-  event.dataTransfer.setData('text', entryItem.id);
-  // Temporarily disable contentEditable during drag operation
-  entryItem.querySelector('span[contenteditable]').contentEditable = false;
-}
-
-function allowDrop(event) {
-  event.preventDefault();
-}
-
-function drop(event) {
-  event.preventDefault();
-  const data = event.dataTransfer.getData('text');
-  event.target.appendChild(document.getElementById(data));
-  // Re-enable contentEditable after drop operation
-  document.getElementById(data).querySelector('span[contenteditable]').contentEditable = true;
+function toggleEntriesPanel() {
+  const entriesPanel = document.getElementById('entries-panel');
+  entriesPanel.classList.toggle('entries-panel-hidden');
+  entriesPanel.classList.toggle('entries-panel-visible');
 }
