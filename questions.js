@@ -52,6 +52,16 @@ function loadOrder() {
   updateQuestions();
 }
 
+function loadEditableQuestions() {
+  let storedQuestions = JSON.parse(localStorage.getItem('editableQuestions')) || {};
+  Array.from(editableList.children).forEach((item) => {
+    const questionId = item.getAttribute('data-id');
+    if (storedQuestions[questionId]) {
+      item.querySelector('.question-item').textContent = storedQuestions[questionId];
+    }
+  });
+}
+
 function attachBlurListenerToQuestionItem(item) {
   const questionItem = item.querySelector('.question-item');
   questionItem.addEventListener('blur', () => {
@@ -98,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('questions-settings-icon').addEventListener('click', toggleQuestionsSettingsPanel);
   
   loadOrder();
+  loadEditableQuestions();
 
   document.getElementById('journal-entry').addEventListener('input', function() {
     localStorage.setItem('journalEntry', this.value);
