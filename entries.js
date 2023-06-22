@@ -59,7 +59,7 @@ function createNewEntry(entry) {
     <li id="${entry.id}" draggable="true" class="entry-item" ondragstart="drag(event)" data-id="${entry.id}">
       <div>
         <span class="drag-handle"></span>
-        <span contenteditable="true">${entry.text}</span>
+        <span contenteditable="true" oninput="saveEntriesToLocalStorage()">${entry.text}</span>
       </div>
     </li>
   `;
