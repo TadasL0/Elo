@@ -2,13 +2,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById('search-form').addEventListener('submit', function(event) {
       event.preventDefault();
       var searchQuery = document.getElementById('goal').value;
-      submitGoal(`Breakdown of goal "${searchQuery}" into tasks:`);
+      submitGoal(searchQuery);
   });
 });
 
 function submitGoal(goal) {
   if (goal) {
-    axios.post('http://localhost:3001/api/gpt4', { prompt: goal })
+    const prompt = `Breakdown of goal "${goal}" into tasks:`;
+    axios.post('http://localhost:3001/api/gpt4', { prompt: prompt })
       .then(response => {
         console.log(response.data);
         let chunks = response.data.choices[0].text.split('\n');
