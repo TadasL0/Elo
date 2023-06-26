@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-  document.getElementById('search-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      var searchQuery = document.getElementById('goal').value;
-      submitGoal(searchQuery);
-  });
+  const form = document.getElementById('search-form');
+  if(form){
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        var searchQuery = document.getElementById('goal').value;
+        submitGoal(searchQuery);
+    });
+  }
 });
 
 function submitGoal(goal) {
@@ -14,12 +17,14 @@ function submitGoal(goal) {
         console.log(response.data);
         let chunks = response.data.choices[0].text.split('\n');
         let chunksList = document.getElementById('chunks-list');
-        chunksList.innerHTML = '';  // clear the list
-        chunks.forEach(chunk => {
-          let li = document.createElement('li');
-          li.textContent = chunk;
-          chunksList.appendChild(li);
-        });
+        if(chunksList){
+          chunksList.innerHTML = '';  // clear the list
+          chunks.forEach(chunk => {
+            let li = document.createElement('li');
+            li.textContent = chunk;
+            chunksList.appendChild(li);
+          });
+        }
       })
       .catch(err => {
         console.error(err);
