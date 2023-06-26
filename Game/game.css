@@ -87,6 +87,12 @@ main {
   color: var(--entry-text-color);
 }
 
+.goal-chunks {
+  height: 400px; /* or any other value */
+  overflow-y: auto; /* add a scrollbar if needed */
+  /* add more styles as needed */
+}
+
 #goal-container input[type="text"],
 #goal-container input[type="submit"] {
   width: 100%;
