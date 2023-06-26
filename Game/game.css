@@ -1,0 +1,105 @@
+:root {
+  --main-text-color: #000000;
+  --background-color: #303030;
+  --content-background-color: #292929;
+  --content-border-color: rgb(95, 95, 95);
+  --entry-color: #383838;
+  --entry-text-color: #ffffff;
+  --placeholder-color: #ffffff;
+  --settings-background-color: #333333;
+  --settings-text-color: #ffffff;
+  --settings-question-background-color: #444444;
+  --icon-color: #B3B3B3;  /* slightly brighter gray */
+  --textarea-background-color: #444444;  /* dark gray for dark mode */
+  --add-button-background-color: #ffffff; /* white */
+  --add-button-icon-color: #ffffff; /* black */
+}
+
+html {
+  height: 100%;
+  background-color: var(--background-color);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--main-text-color);
+}
+
+#progress-tracker {
+  width: 5%;
+  height: 80vh;
+  position: fixed;
+  left: 0;
+  top: 10vh;
+  display: flex;
+  flex-direction: column-reverse;
+  color: var(--main-text-color);
+}
+
+#task-completion {
+  writing-mode: bt-lr; /* IE */
+  -webkit-appearance: slider-vertical; /* WebKit */
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+}
+
+#goal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--content-background-color);
+  border: 1px solid var(--content-border-color);
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  color: var(--entry-text-color);
+}
+
+#goal-chunks {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--content-background-color);
+  border: 1px solid var(--content-border-color);
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  color: var(--entry-text-color);
+}
+
+#goal-container input[type="text"],
+#goal-container input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--entry-color);
+  background-color: var(--entry-color);
+  color: var(--entry-text-color);
+}
+
+#goal-container input[type="submit"] {
+  cursor: pointer;
+  background-color: var(--add-button-background-color);
+  color: var(--add-button-icon-color);
+}

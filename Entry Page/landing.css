@@ -1,104 +1,119 @@
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden; /* prevent horizontal scroll */
-  }
-  
-  header {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-    background-color: #333;
-    color: #fff;
-  }
-  
-  #options-container {
-    display: flex;
-    justify-content: center; /* align items in the center */
-    gap: 5%; /* adjust this to increase/decrease gap between buttons */
-    position: absolute;
-    left: 50%; 
-    transform: translateX(-50%); 
-    width: 100%; 
-    height: 50%; 
-  }
-  
-  .option {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 550px; /* fixed width */
-    height: 300px; /* fixed height */
-    background-color: transparent;
-    text-decoration: none;
-    color: #fff;
-    font-size: 2em;
-    border-radius: 4px;
-  }
-  
-  .option:hover {
-    transform: scale(1.05);
-  }
-  
-  .option:nth-child(1) {
-    background-color: #b2d8d8; /* light aqua color */
-  }
-  
-  .option:nth-child(2) {
-    background-color: #000080; /* ocean blue color */
-  }
-  
-  .btn-content {
-    text-align: center;
-    width: 100%;
-  }
-  
-  // BACKGROUND SHAPES STYLING //
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden; /* prevent horizontal scroll */
+}
 
-  .ps-shape {
-    position: absolute;
-    background-color: #444;
-  }
-  
-  #square {
-    width: 100px;
-    height: 100px;
-  }
-  
-  #triangle {
-    width: 0;
-    height: 0;
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-    border-bottom: 100px solid #444;
-  }
-  
-  #circle {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-  }
-  
-  #cross {
-    width: 100px;
-    height: 100px;
-    transform: rotate(45deg);
-  }
-  #cross:before, #cross:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 45px;
-    right: 45px;
-    background: #444;
-  }
-  
+header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  background-color: #333;
+  color: #fff;
+}
+
+#options-container {
+  display: flex;
+  justify-content: center; /* align items in the center */
+  gap: 5%; /* adjust this to increase/decrease gap between buttons */
+  position: absolute;
+  left: 50%; 
+  transform: translateX(-50%); 
+  width: 100%; 
+  height: 50%; 
+}
+
+.option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 550px; /* fixed width */
+  height: 300px; /* fixed height */
+  background-color: transparent;
+  text-decoration: none;
+  color: #fff;
+  font-size: 2em;
+  border-radius: 4px;
+}
+
+.option:hover {
+  transform: scale(1.05);
+}
+
+.option:nth-child(1) {
+  background-color: #b2d8d8; /* light aqua color */
+}
+
+.option:nth-child(2) {
+  background-color: #000080; /* ocean blue color */
+}
+
+.btn-content {
+  text-align: center;
+  width: 100%;
+}
+
+// BACKGROUND SHAPES STYLING //
+
+.ps-shape {
+  position: absolute;
+  background-color: #444;
+}
+
+#square {
+  width: 100px;
+  height: 100px;
+}
+
+#triangle {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 100px solid #444;
+}
+
+#circle {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+#cross {
+  width: 100px;
+  height: 100px;
+  transform: rotate(45deg);
+}
+#cross:before, #cross:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 45px;
+  right: 45px;
+  background: #444;
+}
+
+#buttons {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  transform: translate(-50%, -50%);
+}
+
+.shapes-container {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden; /* to prevent shapes from dragging the webpage down */
+}

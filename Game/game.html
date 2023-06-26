@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Elo - Play</title>
-  <!-- Link to your CSS file -->
-  <link rel="stylesheet" type="text/css" href="elo.css">
+  <title>Elo</title>
+  <link rel="stylesheet" type="text/css" href="game.css">
 </head>
 <body>
-  <header>
-    <h1>Welcome to Elo! Let's play.</h1>
-  </header>
-  <main>
-    <section id="goal-container">
-      <h2>What is your goal?</h2>
-      <form>
-        <input type="text" id="goal" name="goal">
-        <input type="submit" value="Submit">
-      </form>
-    </section>
-  </main>
+  
+  <div id="progress-tracker">
+    <label for="task-completion">Task Completion:</label>
+    <input type="range" id="task-completion" name="task-completion" min="0" max="100" value="0" orient="vertical">
+    <span id="percentage">0%</span>
+  </div>
+
+  <section id="goal-container">
+    <h2>What is your goal?</h2>
+    <form id="search-form" onsubmit="event.preventDefault(); submitGoal();">
+      <input type="text" id="goal" name="goal" placeholder="Enter your goal">
+      <input type="submit" value="Submit">
+    </form>    
+  </section>
+
+  <section id="goal-chunks">
+    <h2>Your Goal in Chunks</h2>
+    <ul id="chunks-list"></ul>
+  </section>
+
+  <script src="gptcaller.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@ const express = require("express");
 const path = require('path');
 const { Pool } = require("pg");
 const cors = require("cors");
-const createApiRouter = require("./apiRouter");
+const axios = require('axios');
 const rateLimit = require("express-rate-limit");
 const winston = require('winston');
 require('dotenv').config();
@@ -26,7 +26,7 @@ const limiter = rateLimit({
 
 // Middleware
 app.use(cors({
-  origin: 'https://eloskill.com', 
+  origin: 'http://127.0.0.1:5500', 
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true, 
@@ -34,13 +34,9 @@ app.use(cors({
   optionsSuccessStatus: 200
 }));
 
-app.use(limiter); // apply rate limiter
+app.use(express.json()); // This helps to parse JSON data in request body
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:5500');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+app.use(limiter); // apply rate limiter
 
 // ** Serve static files from the React app **
 app.use(express.static(path.join(__dirname, '..')));
@@ -71,8 +67,7 @@ async function connectToDatabase() {
 connectToDatabase();
 
 // Register the API routes
-const apiRouter = createApiRouter(pool); 
-app.use("/api", cors(), apiRouter); 
+app.use("/api", cors(), express.Router()); 
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -87,6 +82,34 @@ app.get('*', (req, res) => {
       res.status(500).send(err);
     }
   });
+});
+
+app.post("/api/gpt4", async (req, res) => {
+  try {
+      const prompt = req.body.prompt;
+      const axiosResponse = await axios.post(
+          "https://api.openai.com/v4/engines/davinci-codex/completions",
+          {
+              prompt: prompt,
+              max_tokens: 60,
+          },
+          {
+              headers: {
+                  "Content-Type": "application/json",
+                  "Authorization": "Bearer " + process.env.elo_key,
+              },
+          }
+      );
+
+      const gpt4Response = axiosResponse.data;
+
+      res.json(gpt4Response);
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({
+          message: "Error occurred when interacting with GPT-4 API",
+      });
+  }
 });
 
 // Start the server
