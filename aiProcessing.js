@@ -2,30 +2,26 @@ const API_ENDPOINT_GPT4 = "https://api.openai.com/v2/engines/davinci-codex/compl
 const API_KEY = process.env.elo_key;
 
 const extractMainIssue = async (text) => {
-  try {
-    const response = await fetch(API_ENDPOINT_GPT4, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${API_KEY}`,
-      },
-      body: JSON.stringify({
-        prompt: `${text}\n\nExtract the single most pervasive severe issue and output it succinctly`,
-        max_tokens: 100,
-        temperature: 0.5,
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    try {
+      const response = await fetch("/api/mainIssue", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const { mainIssue } = await response.json();
+  
+      return mainIssue;
+    } catch (error) {
+      console.error("An error occurred while extracting the main issue:", error);
     }
-
-    const responseData = await response.json();
-    return responseData.choices[0].text.trim();
-  } catch (error) {
-    console.error("An error occurred while extracting the main issue:", error);
-  }
-};
+  };  
 
 const updateMainQuest = async (storage = window.localStorage) => {
   try {

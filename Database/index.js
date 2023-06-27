@@ -84,31 +84,35 @@ app.get('*', (req, res) => {
   });
 });
 
-app.post("/api/gpt4", async (req, res) => {
+app.post("/api/mainIssue", async (req, res) => {
   try {
-      const prompt = req.body.prompt;
-      const axiosResponse = await axios.post(
-          "https://api.openai.com/v4/engines/davinci-codex/completions",
-          {
-              prompt: prompt,
-              max_tokens: 60,
-          },
-          {
-              headers: {
-                  "Content-Type": "application/json",
-                  "Authorization": "Bearer " + process.env.elo_key,
-              },
-          }
-      );
+    const text = req.body.text;
 
-      const gpt4Response = axiosResponse.data;
+    const axiosResponse = await axios.post(
+      "https://api.openai.com/v2/engines/davinci-codex/completions",
+      {
+        prompt: `${text}\n\nWhat is the main issue here?`,
+        max_tokens: 100,
+        temperature: 0.5,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + process.env.elo_key,
+        },
+      }
+    );
 
-      res.json(gpt4Response);
+    const gpt4Response = axiosResponse.data;
+
+    const mainIssue = gpt4Response.choices[0].text.trim();
+
+    res.json({ mainIssue });
   } catch (err) {
-      console.error(err);
-      res.status(500).json({
-          message: "Error occurred when interacting with GPT-4 API",
-      });
+    logger.error("Error occurred when interacting with GPT-4 API", err);
+    res.status(500).json({
+      message: "Error occurred when interacting with GPT-4 API",
+    });
   }
 });
 
