@@ -1,6 +1,6 @@
 let autosaveTimer;
 const ENTRY_MAX_LENGTH = 5000;
-const AUTO_SAVE_DELAY = 1000; // in ms
+const AUTO_SAVE_DELAY = 5000; // in ms, 5s
 const API_ENDPOINT = "https://app.eloskill.com/api/entries";
 const LOCAL_STORAGE_KEY = "journalEntry";
 
@@ -78,6 +78,8 @@ const setupPage = () => {
     if (savedEntry) {
       journalEntryElement.value = savedEntry;
     }
+
+    journalEntryElement.addEventListener("input", autosaveEntry);
   } catch (error) {
     console.error("An error occurred while setting up the page:", error);
   }
