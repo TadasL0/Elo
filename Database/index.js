@@ -77,42 +77,41 @@ app.use((err, req, res, next) => {
 
 // Catch all other routes and return the index.html file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Elo', 'index.html'), (err) => {
+  res.sendFile(path.join(root, 'Elo', 'index.html'), (err) => {
     if (err) {
       res.status(500).send(err);
     }
   });
 });
 
+// For getting the main issue highlighted
+
 app.post("/api/mainIssue", async (req, res) => {
   try {
-    const text = req.body.text;
+      const text = req.body.text;
+      const axiosResponse = await axios.post(
+          "https://api.openai.com/v4/engines/davinci-codex/completions",
+          {
+              prompt: `${text}\n\nWhat is the main issue here?`,
+              max_tokens: 100,
+              temperature: 0.5,
+          },
+          {
+              headers: {
+                  "Content-Type": "application/json",
+                  "Authorization": "Bearer " + process.env.elo_key,
+              },
+          }
+      );
 
-    const axiosResponse = await axios.post(
-      "https://api.openai.com/v2/engines/davinci-codex/completions",
-      {
-        prompt: `${text}\n\nWhat is the main issue here?`,
-        max_tokens: 100,
-        temperature: 0.5,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + process.env.elo_key,
-        },
-      }
-    );
+      const gpt4Response = axiosResponse.data.choices[0].text.trim();
 
-    const gpt4Response = axiosResponse.data;
-
-    const mainIssue = gpt4Response.choices[0].text.trim();
-
-    res.json({ mainIssue });
+      res.json({mainIssue: gpt4Response});
   } catch (err) {
-    logger.error("Error occurred when interacting with GPT-4 API", err);
-    res.status(500).json({
-      message: "Error occurred when interacting with GPT-4 API",
-    });
+      console.error(err);
+      res.status(500).json({
+          message: "Error occurred when interacting with GPT-4 API",
+      });
   }
 });
 

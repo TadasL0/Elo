@@ -1,6 +1,3 @@
-const API_ENDPOINT_GPT4 = "https://api.openai.com/v2/engines/davinci-codex/completions";
-const API_KEY = process.env.elo_key;
-
 const extractMainIssue = async (text) => {
     try {
       const response = await fetch("/api/mainIssue", {
