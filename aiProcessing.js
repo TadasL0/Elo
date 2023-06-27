@@ -7,10 +7,10 @@ const extractMainIssue = async (text) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": API_KEY,
+        "Authorization": `Bearer ${API_KEY}`,
       },
       body: JSON.stringify({
-        prompt: `${text}\n\nWhat is the main issue here?`,
+        prompt: `${text}\n\nExtract the single most pervasive severe issue and output it succinctly`,
         max_tokens: 100,
         temperature: 0.5,
       }),
@@ -27,14 +27,37 @@ const extractMainIssue = async (text) => {
   }
 };
 
-const updateMainQuest = async () => {
+const updateMainQuest = async (storage = window.localStorage) => {
   try {
     const journalEntryElement = document.getElementById("journal-entry");
-    const mainQuestElement = document.getElementById("main-quest");
 
     const mainIssue = await extractMainIssue(journalEntryElement.value);
-    mainQuestElement.value = mainIssue;
+
+    // Save the main issue in local storage
+    storage.setItem('mainQuest', mainIssue);
+
+    // Update main quest in the textarea
+    const mainQuestElement = document.getElementById('main-quest');
+    if (mainQuestElement) {
+      mainQuestElement.value = mainIssue;
+    }
   } catch (error) {
     console.error("An error occurred while updating the main quest:", error);
   }
+};
+
+window.updateMainQuest = updateMainQuest;
+
+window.onload = function() {
+  // Update the streak as soon as the page loads
+  updateStreak();
+
+  // Load the main quest from local storage
+  const mainQuest = window.localStorage.getItem('mainQuest');
+  if (mainQuest) {
+    document.getElementById('main-quest').value = mainQuest;
+  }
+
+  // Update main quest after page load
+  updateMainQuest();
 };
