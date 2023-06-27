@@ -109,3 +109,15 @@ main {
   background-color: var(--add-button-background-color);
   color: var(--add-button-icon-color);
 }
+
+#main-quest-section {
+  width: 85%; /* Adjust as needed, currently same as your main section */
+  margin: 0 auto; /* Center the section horizontally */
+  text-align: center; /* Center the text */
+  background-color: var(--content-background-color);
+  border: 1px solid var(--content-border-color);
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  color: var(--entry-text-color);
+}

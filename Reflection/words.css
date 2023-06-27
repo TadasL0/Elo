@@ -1,0 +1,44 @@
+#word-frequency-button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 10000;
+    transition: opacity 0.3s linear;
+    background: none;
+    color: var(--icon-color);  /* use the color variable */
+    border: none;
+    padding: 0;
+    font: inherit;
+    outline: inherit;
+}
+
+#word-frequency-section {
+    position: fixed;
+    bottom: 60px;
+    right: 10px;
+    background-color: #444;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    display: flex;
+    flex-direction: column;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    z-index: 9999;
+    border-radius: 10px white;
+}
+
+.word-frequency-hidden {
+    transform: scaleY(0);
+    opacity: 0;
+}
+
+
+.word-frequency-shown {
+    transform: scaleY(1);
+    opacity: 1 !important; /* Adding important to make sure this style is applied */
+}
+

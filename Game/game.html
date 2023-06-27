@@ -5,12 +5,19 @@
   <link rel="stylesheet" type="text/css" href="game.css">
 </head>
 <body>
-  
+
   <div id="progress-tracker">
     <label for="task-completion">Task Completion:</label>
     <input type="range" id="task-completion" name="task-completion" min="0" max="100" value="0" orient="vertical">
     <span id="percentage">0%</span>
   </div>
+
+  <!-- Main Quest Section -->
+  <section id="main-quest-section">
+    <h2>Main Quest</h2>
+    <p id="main-quest"></p>
+  </section>
+  <!-- ... rest of the HTML content ... -->
 
   <section id="goal-container">
     <h2>What is your goal?</h2>
@@ -23,7 +30,7 @@
   <section id="goal-chunks" class="goal-chunks">
     <h2>Your Goal in Chunks</h2>
     <ul id="chunks-list"></ul>
-</section>
+  </section>
 
   <script src="gptcaller.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

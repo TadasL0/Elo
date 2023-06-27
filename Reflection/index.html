@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="mobile.css">
   <link rel="stylesheet" href="levelup.css">
   <link rel="stylesheet" href="questions.css">
+  <link rel="stylesheet" href="words.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Questrial&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="light-theme.css">
@@ -26,6 +27,14 @@
   <div id="level-container"></div>
   <div id="cog-icon"></div>
 </header>
+<!-- Word Frequency Leaderboard -->
+<button id="word-frequency-button">
+  <i class="fas fa-exclamation"></i>
+</button>
+<div id="word-frequency-section" class="word-frequency-hidden">
+<h2>Most Used Words</h2>
+<ul id="leaderboard"></ul>
+</div>
 <!-- Entries Section -->
 <div id="entries-panel-button">
   <i class="fas fa-book" id="fa-book-icon"></i>
@@ -62,7 +71,8 @@
       <ul id="user-question-list" class="questions-list">
         <li class="sortable-item" data-id="userQuestion1"><span class="drag-handle"></span> <span class="question-item" contenteditable="true">Click to change this prompt.</span></li>
         <!-- ... -->
-      </ul>      
+      </ul>
+      <ul id="leaderboard"></ul>      
     </div>    
   </div>
   <!-- Dark Mode -->
@@ -92,5 +102,7 @@
   <script src="saving.js"></script>
   <script src="streak.js"></script>
   <script src="darkmode.js"></script>
+  <script src="wordfrequency.js"></script>
+  <script src="words.js"></script>
 </body>
 </html>
