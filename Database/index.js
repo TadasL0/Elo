@@ -116,7 +116,7 @@ app.post("/api/mainIssue", async (req, res) => {
 });
 
 // Start the server
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   logger.info(`Server is running on port ${port}`);
 });
