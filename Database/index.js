@@ -7,7 +7,6 @@ const axios = require('axios');
 const rateLimit = require("express-rate-limit");
 const winston = require('winston');
 require('dotenv').config({ path: '../database.env' });
-console.log(process.env.DB_PASSWORD);
 
 const app = express();
 
@@ -78,7 +77,7 @@ app.use((err, req, res, next) => {
 
 // Catch all other routes and return the index.html file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(root, 'Elo', 'index.html'), (err) => {
+  res.sendFile(path.join(__dirname, 'Elo', 'index.html'), (err) => {
     if (err) {
       res.status(500).send(err);
     }
