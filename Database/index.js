@@ -6,7 +6,7 @@ const cors = require("cors");
 const axios = require('axios');
 const rateLimit = require("express-rate-limit");
 const winston = require('winston');
-require('dotenv').config();
+require('dotenv').config({ path: '../database.env' });
 
 const app = express();
 
