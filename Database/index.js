@@ -7,6 +7,7 @@ const axios = require('axios');
 const rateLimit = require("express-rate-limit");
 const winston = require('winston');
 require('dotenv').config({ path: '../database.env' });
+console.log(process.env.DB_PASSWORD);
 
 const app = express();
 
