@@ -111,6 +111,7 @@ main {
 }
 
 #main-quest-section {
+  font-family: 'Inter', sans-serif;
   width: 85%; /* Adjust as needed, currently same as your main section */
   margin: 0 auto; /* Center the section horizontally */
   text-align: center; /* Center the text */
@@ -120,4 +121,9 @@ main {
   padding: 20px;
   box-sizing: border-box;
   color: var(--entry-text-color);
+}
+
+#main-quest {
+  width: 80%; /* adjust the width as needed */
+  height: 200px; /* adjust the height as needed */
 }
